@@ -38,7 +38,6 @@ minecraft {
 }
 
 dependencies {
-	compile "org.twitter4j:4.0.6"
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
