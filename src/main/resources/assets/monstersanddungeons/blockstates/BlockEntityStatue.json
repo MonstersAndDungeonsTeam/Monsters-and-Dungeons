@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "monstersanddungeons:BlockEntityStatue" },
+            { "model": "monstersanddungeons:BlockEntityStatue", "y": 90 },
+            { "model": "monstersanddungeons:BlockEntityStatue", "y": 180 },
+            { "model": "monstersanddungeons:BlockEntityStatue", "y": 270 }
+        ]
+    }
+}

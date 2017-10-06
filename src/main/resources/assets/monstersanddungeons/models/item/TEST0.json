@@ -1,0 +1,26 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "monstersanddungeons:items/TEST_layer0"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "decay": 0
+            },
+            "model": "monstersanddungeons:item/TEST"
+        },
+        {
+            "predicate": {
+                "decay": 1
+            },
+            "model": "monstersanddungeons:item/TEST1"
+        },
+        {
+            "predicate": {
+                "decay": 2
+            },
+            "model": "monstersanddungeons:item/TEST1"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "monstersanddungeons:Stone Pagoda" },
+            { "model": "monstersanddungeons:Stone Pagoda", "y": 90 },
+            { "model": "monstersanddungeons:Stone Pagoda", "y": 180 },
+            { "model": "monstersanddungeons:Stone Pagoda", "y": 270 }
+        ]
+    }
+}

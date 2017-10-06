@@ -1,0 +1,17 @@
+{
+  "automaton_stone_hurt": {
+    "category": "hostile",
+    "subtitle": "monstersanddungeons.subtitle.automaton_stone_hurt",
+    "sounds": [
+      "monstersanddungeons:automaton_hurt1"
+    ]
+  },
+  "automaton_metal_hurt": {
+    "category": "hostile",
+    "subtitle": "monstersanddungeons.subtitle.automaton_metal_hurt",
+    "sounds": [
+      "monstersanddungeons:automaton_metal_hurt1",
+      "monstersanddungeons:automaton_metal_hurt2"
+    ]
+  }
+}

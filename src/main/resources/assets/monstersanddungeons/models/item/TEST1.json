@@ -1,0 +1,8 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "monstersanddungeons:items/TEST2_layer0",
+        "layer1": "monstersanddungeons:items/TEST2_layer1",
+        "layer2": "monstersanddungeons:items/TEST2_layer2"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "items/bow_standby"
+    }
+    "overrides": [
+        {
+            "predicate": {
+                "number": 0.0
+            },
+            "model": "monstersanddungeons:item/TEST"
+        },
+        {
+            "predicate": {
+                "number": 1.0
+            },
+            "model": "monstersanddungeons:item/TEST1"
+        },
+        {
+            "predicate": {
+                "number": 2.0
+            },
+            "model": "item/bow_pulling_2"
+        }
+    ]
+}
