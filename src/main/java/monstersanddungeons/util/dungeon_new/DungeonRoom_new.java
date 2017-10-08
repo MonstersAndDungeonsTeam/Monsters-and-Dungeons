@@ -4,15 +4,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import monstersanddungeons.util.StructureData;
+import monstersanddungeons.util.dungeon.DungeonNBTTag;
+import monstersanddungeons.util.dungeon.EnumDirection;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import monstersanddungeons.util.StructureData;
-import monstersanddungeons.util.dungeon.DungeonNBTTag;
-import monstersanddungeons.util.dungeon.DungeonRoom;
-import monstersanddungeons.util.dungeon.EnumDirection;
 
 public class DungeonRoom_new 
 {

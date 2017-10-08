@@ -4,20 +4,17 @@ import java.util.List;
 
 import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntitySafeZone extends Entity {
 
-	private static final DataParameter<Boolean> playerNearby = EntityDataManager.<Boolean>createKey(EntitySafeZone.class, DataSerializers.BOOLEAN);
+	private final DataParameter<Boolean> playerNearby = EntityDataManager.<Boolean>createKey(EntitySafeZone.class, DataSerializers.BOOLEAN);
 	EntityAutomatonsRookBoss owner = null;
 
 	//Server and client
@@ -76,7 +73,7 @@ public class EntitySafeZone extends Entity {
 			if(this.cooldown == 0)
 			{
 
-				players = worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.posX - 2, this.posY - 2, this.posZ - 2,  this.posX + 2,  this.posY + 2, this.posZ + 2));
+				players = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.posX - 2, this.posY - 2, this.posZ - 2,  this.posX + 2,  this.posY + 2, this.posZ + 2));
 
 				if(!players.isEmpty())
 				{
@@ -100,7 +97,7 @@ public class EntitySafeZone extends Entity {
 				this.cooldown--;
 		}else
 		{
-			if(!this.worldObj.isRemote)
+			if(!this.world.isRemote)
 				this.setDead();
 		}
 	}

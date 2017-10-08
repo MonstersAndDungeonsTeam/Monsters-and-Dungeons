@@ -1,9 +1,6 @@
 package monstersanddungeons.entity.ai;
 
-import monstersanddungeons.client.models.ModelAutomatonsRookBoss;
-import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
 import monstersanddungeons.util.entity.IMaDBoss;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.world.World;
 
 public abstract class EntitySpecialAttackBase<T, V extends IMaDBoss> {

@@ -3,24 +3,14 @@ package monstersanddungeons.entity.ai.ent;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.World;
 import monstersanddungeons.client.models.ModelEnt;
 import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
 import monstersanddungeons.entity.miscellaneous.EntitySunBeam;
 import monstersanddungeons.entity.world.EntityEnt;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.World;
 
 public class EntitySunAttack extends EntitySpecialAttackBase<ModelEnt, EntityEnt> {
 
@@ -37,7 +27,7 @@ public class EntitySunAttack extends EntitySpecialAttackBase<ModelEnt, EntityEnt
 	{
 		if(super.shouldActivate(world, bossEntity))
 		{
-			List<Entity> nearby = bossEntity.worldObj.getEntitiesWithinAABBExcludingEntity(bossEntity, new AxisAlignedBB(bossEntity.getPosition().getX() - 15, bossEntity.getPosition().getY() - 15, bossEntity.getPosition().getZ() - 15, bossEntity.getPosition().getX() + 15, bossEntity.getPosition().getY() + 15, bossEntity.getPosition().getZ() + 15));
+			List<Entity> nearby = bossEntity.world.getEntitiesWithinAABBExcludingEntity(bossEntity, new AxisAlignedBB(bossEntity.getPosition().getX() - 15, bossEntity.getPosition().getY() - 15, bossEntity.getPosition().getZ() - 15, bossEntity.getPosition().getX() + 15, bossEntity.getPosition().getY() + 15, bossEntity.getPosition().getZ() + 15));
 			for(Entity entity : nearby)
 			{	
 				if(entity instanceof EntityLivingBase)
@@ -45,7 +35,7 @@ public class EntitySunAttack extends EntitySpecialAttackBase<ModelEnt, EntityEnt
 					EntitySunBeam beam = new EntitySunBeam(world);
 					beam.setPosition(entity.posX, entity.posY, entity.posZ);
 					sun.add(beam);
-					world.spawnEntityInWorld(beam);
+					world.spawnEntity(beam);
 				}
 			}
 			return true;

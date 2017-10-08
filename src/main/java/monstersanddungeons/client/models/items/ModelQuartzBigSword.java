@@ -1,7 +1,5 @@
 package monstersanddungeons.client.models.items;
 
-import java.util.Random;
-
 import monstersanddungeons.entity.miscellaneous.EntityFlyingSword;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

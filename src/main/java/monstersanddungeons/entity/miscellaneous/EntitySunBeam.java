@@ -3,11 +3,8 @@ package monstersanddungeons.entity.miscellaneous;
 import java.util.List;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -43,7 +40,7 @@ public class EntitySunBeam extends Entity{
 	{
 		super.onUpdate();
 
-		List<Entity> entities = worldObj.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(this.getPosition().getX() - 3, this.getPosition().getY() - 3, this.getPosition().getZ() - 3, this.getPosition().getX() + 3, this.getPosition().getY() + 3, this.getPosition().getZ() + 3));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(this.getPosition().getX() - 3, this.getPosition().getY() - 3, this.getPosition().getZ() - 3, this.getPosition().getX() + 3, this.getPosition().getY() + 3, this.getPosition().getZ() + 3));
 		for(Entity entity : entities)
 		{
 			if(entity instanceof EntityPlayer)

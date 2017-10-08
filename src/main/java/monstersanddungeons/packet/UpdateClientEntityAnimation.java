@@ -2,7 +2,6 @@ package monstersanddungeons.packet;
 
 import io.netty.buffer.ByteBuf;
 import monstersanddungeons.entity.MaDEntityMonsterBase;
-import monstersanddungeons.entity.automatons.EntityAutomatonsRook;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
@@ -43,8 +42,8 @@ public class UpdateClientEntityAnimation implements IMessage, IMessageHandler<Up
 
 			@Override
 			public void run() {
-				EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-				World world = p.worldObj;
+				EntityPlayer p = Minecraft.getMinecraft().player;
+				World world = p.world;
 
 				MaDEntityMonsterBase rook = (MaDEntityMonsterBase) world.getEntityByID(message.id);
 

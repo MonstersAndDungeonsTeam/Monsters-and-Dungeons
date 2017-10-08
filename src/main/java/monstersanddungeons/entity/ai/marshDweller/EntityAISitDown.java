@@ -35,7 +35,7 @@ public class EntityAISitDown extends EntityAIBase
 		return false;
 	}
 	@Override
-	public boolean continueExecuting() 
+	public boolean shouldContinueExecuting() 
 	{
 		this.dweller.setSittingDown(true);
 		sitting--;

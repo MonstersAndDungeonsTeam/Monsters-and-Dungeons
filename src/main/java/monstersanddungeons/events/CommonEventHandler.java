@@ -15,7 +15,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -36,9 +35,9 @@ public class CommonEventHandler {
 	@SubscribeEvent
 	public void onEntityAttack(LivingAttackEvent event){
 		if(event.getSource() != StatDamageSources.bonusDamage){
-			if(event.getSource().getSourceOfDamage() instanceof EntityPlayer){
+			if(event.getSource().getTrueSource() instanceof EntityPlayer){
 
-				EntityPlayer attacker = (EntityPlayer)event.getSource().getSourceOfDamage();
+				EntityPlayer attacker = (EntityPlayer)event.getSource().getTrueSource();
 				float bonusDamage = 0;
 				if(attacker.getHeldItemMainhand() != null && attacker.getHeldItemMainhand().getItem() == MaDItemsHandler.quartzWarhammer){
 					double str = 0;
@@ -66,7 +65,7 @@ public class CommonEventHandler {
 
 				if(event.getEntityLiving() instanceof EntityAutomatonsRook)
 				{
-					if(event.getSource().getSourceOfDamage().getLookVec().dotProduct(event.getEntity().getLookVec()) < 0.5)
+					if(event.getSource().getTrueSource().getLookVec().dotProduct(event.getEntity().getLookVec()) < 0.5)
 					{
 						if(event.isCancelable())
 						{
@@ -75,7 +74,7 @@ public class CommonEventHandler {
 					}
 				}else if(event.getEntityLiving() instanceof EntityAutomatonsRookBoss)	
 				{
-					if(event.getSource().getSourceOfDamage().getLookVec().dotProduct(event.getEntity().getLookVec()) < 0.5 && ((EntityAutomatonsRookBoss) event.getEntityLiving()).getWeakenedCD() > 0)
+					if(event.getSource().getTrueSource().getLookVec().dotProduct(event.getEntity().getLookVec()) < 0.5 && ((EntityAutomatonsRookBoss) event.getEntityLiving()).getWeakenedCD() > 0)
 					{
 
 						if(event.isCancelable())
@@ -92,7 +91,7 @@ public class CommonEventHandler {
 	@SubscribeEvent
 	public void onPlayerTickEvent(PlayerTickEvent e)
 	{
-		World world = e.player.worldObj;
+		World world = e.player.world;
 		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(e.player, new AxisAlignedBB(e.player.getPosition().getX() - 50, e.player.getPosition().getY() - 50, e.player.getPosition().getZ() - 50, e.player.getPosition().getX() + 50, e.player.getPosition().getY() + 50, e.player.getPosition().getZ() + 50));
 
 		for(Entity entity : entities)

@@ -1,12 +1,6 @@
 package monstersanddungeons.entity.marshdwellers;
 
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import monstersanddungeons.entity.MaDEntityMonsterBase;
-import monstersanddungeons.entity.ai.marshDweller.EntityAISitDown;
 
 public class EntityMarshDwellerFisherman extends EntityMarshDweller{
 

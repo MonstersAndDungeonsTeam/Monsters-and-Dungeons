@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import monstersanddungeons.blocks.MaDBlocksHandler;
+import monstersanddungeons.entity.marshdwellers.EntityMarshDweller;
+import monstersanddungeons.entity.marshdwellers.EntityMarshDwellerFisherman;
+import monstersanddungeons.entity.marshdwellers.EntityMarshDwellerShaman;
+import monstersanddungeons.tileentity.miscellaneous.TileEntityMonsterStatue;
+import monstersanddungeons.util.dungeon_new.DungeonRoom_new;
+import monstersanddungeons.util.dungeon_new.MaDDungeonBase;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockLog;
@@ -17,15 +24,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableList;
-import monstersanddungeons.blocks.MaDBlocksHandler;
-import monstersanddungeons.entity.automatons.EntityPawnCommander;
-import monstersanddungeons.entity.automatons.EntityWhitePawns;
-import monstersanddungeons.entity.marshdwellers.EntityMarshDweller;
-import monstersanddungeons.entity.marshdwellers.EntityMarshDwellerFisherman;
-import monstersanddungeons.entity.marshdwellers.EntityMarshDwellerShaman;
-import monstersanddungeons.tileentity.miscellaneous.TileEntityMonsterStatue;
-import monstersanddungeons.util.dungeon_new.DungeonRoom_new;
-import monstersanddungeons.util.dungeon_new.MaDDungeonBase;
 
 public class VillageFrog extends MaDDungeonBase{
 

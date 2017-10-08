@@ -2,7 +2,6 @@ package monstersanddungeons.entity.ai.rook;
 
 import java.util.List;
 
-import monstersanddungeons.client.ClientProxy;
 import monstersanddungeons.client.models.ModelAutomatonsRookBoss;
 import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
@@ -14,8 +13,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
-
-import org.lwjgl.opengl.GL11;
 
 public class EntityPunchCombo extends EntitySpecialAttackBase<ModelAutomatonsRookBoss, EntityAutomatonsRookBoss>{
 
@@ -57,7 +54,7 @@ public class EntityPunchCombo extends EntitySpecialAttackBase<ModelAutomatonsRoo
 			EntityPlayer attack_player = world.getClosestPlayerToEntity(bossEntity, 50);
 			if(attack_player != null)
 			{
-				if(attack_player.getDistanceSqToEntity(bossEntity) < 50)
+				if(attack_player.getDistanceSq(bossEntity) < 50)
 				{
 					if(bossEntity.getNavigator().tryMoveToEntityLiving(attack_player, 1f))
 					{
@@ -108,7 +105,7 @@ public class EntityPunchCombo extends EntitySpecialAttackBase<ModelAutomatonsRoo
 	@Override
 	public void activateEffect(int animationNumber, EntityAutomatonsRookBoss bossEntity) {
 
-		World world = bossEntity.worldObj;
+		World world = bossEntity.world;
 		if(animationNumber == 50)
 		{
 

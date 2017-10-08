@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 
@@ -268,20 +267,20 @@ public class ModelWitePawns extends MaDEntityModelBase {
 	private void triggerAnimation(EntityWhitePawns pawn)
 	{
 
-		List<EntityPawnCommander> nearby_commanders = pawn.worldObj.getEntitiesWithinAABB(EntityPawnCommander.class, new AxisAlignedBB(pawn.getPosition().getX() - 15, pawn.getPosition().getY() - 15, pawn.getPosition().getZ() - 15, pawn.getPosition().getX() + 15, pawn.getPosition().getY() + 15, pawn.getPosition().getZ() + 15));
+		List<EntityPawnCommander> nearby_commanders = pawn.world.getEntitiesWithinAABB(EntityPawnCommander.class, new AxisAlignedBB(pawn.getPosition().getX() - 15, pawn.getPosition().getY() - 15, pawn.getPosition().getZ() - 15, pawn.getPosition().getX() + 15, pawn.getPosition().getY() + 15, pawn.getPosition().getZ() + 15));
 		if(nearby_commanders.isEmpty())
 		{
-			List<EntityWhitePawns> nearby_pawn = pawn.worldObj.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(pawn.getPosition().getX() - 15, pawn.getPosition().getY() - 15, pawn.getPosition().getZ() - 15, pawn.getPosition().getX() + 15, pawn.getPosition().getY() + 15, pawn.getPosition().getZ() + 15));
+			List<EntityWhitePawns> nearby_pawn = pawn.world.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(pawn.getPosition().getX() - 15, pawn.getPosition().getY() - 15, pawn.getPosition().getZ() - 15, pawn.getPosition().getX() + 15, pawn.getPosition().getY() + 15, pawn.getPosition().getZ() + 15));
 			if(nearby_pawn.size() < 2)
 			{
 				this.animationNumber = 1;
 				return;
 			}else
 			{
-				EntityPlayer player = pawn.worldObj.getNearestAttackablePlayer(pawn, 10, 10);
+				EntityPlayer player = pawn.world.getNearestAttackablePlayer(pawn, 10, 10);
 				if(player != null)
 				{
-					if(pawn.getDistanceSqToEntity(player) < 4)
+					if(pawn.getDistanceSq(player) < 4)
 					{
 						this.animationNumber = 2;
 						this.cantSwitchCD = 40;
@@ -321,7 +320,7 @@ public class ModelWitePawns extends MaDEntityModelBase {
 				{
 					this.cycleNumber++;
 				}
-				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleEmpowerPawns(pawn.worldObj, this.xValue + pawn.posX, pawn.posY + yValue, pawn.posZ + calcValueZ(), 0d, 0d, 0d));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleEmpowerPawns(pawn.world, this.xValue + pawn.posX, pawn.posY + yValue, pawn.posZ + calcValueZ(), 0d, 0d, 0d));
 			}
 
 			if(this.cycleNumber % 2 == 1)
@@ -335,13 +334,13 @@ public class ModelWitePawns extends MaDEntityModelBase {
 					this.cycleNumber++;
 				}
 
-				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleEmpowerPawns(pawn.worldObj, this.xValue + pawn.posX, pawn.posY + yValue, pawn.posZ - calcValueZ(), 0d, 0d, 0d));
+				Minecraft.getMinecraft().effectRenderer.addEffect(new ParticleEmpowerPawns(pawn.world, this.xValue + pawn.posX, pawn.posY + yValue, pawn.posZ - calcValueZ(), 0d, 0d, 0d));
 			}
 
-			EntityPlayer player = pawn.worldObj.getNearestAttackablePlayer(pawn, 10, 10);
+			EntityPlayer player = pawn.world.getNearestAttackablePlayer(pawn, 10, 10);
 			if(player != null)
 			{
-				if(pawn.getDistanceSqToEntity(player) < 4)
+				if(pawn.getDistanceSq(player) < 4)
 				{
 					this.animationNumber = 2;
 					this.cantSwitchCD = 40;

@@ -1,9 +1,7 @@
 package monstersanddungeons;
 
-import monstersanddungeons.events.CommonEventHandler;
 import monstersanddungeons.proxy.CommonProxy;
 import monstersanddungeons.util.Reference;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;

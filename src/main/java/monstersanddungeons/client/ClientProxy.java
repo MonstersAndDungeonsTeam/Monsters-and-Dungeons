@@ -1,7 +1,6 @@
 package monstersanddungeons.client;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
@@ -15,7 +14,6 @@ import monstersanddungeons.events.KeyBindEvent;
 import monstersanddungeons.items.MaDItemsHandler;
 import monstersanddungeons.proxy.CommonProxy;
 import monstersanddungeons.util.Reference;
-import monstersanddungeons.util.ResourceLoader;
 import monstersanddungeons.util.entity.IMaDBoss;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;

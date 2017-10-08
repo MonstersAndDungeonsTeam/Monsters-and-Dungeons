@@ -1,19 +1,13 @@
 package monstersanddungeons.entity.automatons;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackRanged;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import monstersanddungeons.entity.MaDEntityMonsterBase;
 import monstersanddungeons.entity.ai.pawn.EntityAILeaderFindAttackTarget;
 import monstersanddungeons.entity.ai.pawn.EntityAILeaderStackMembers;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
 public class EntityPawnCommander extends MaDEntityMonsterBase {
 
@@ -26,7 +20,7 @@ public class EntityPawnCommander extends MaDEntityMonsterBase {
 
 		this.tasks.addTask(2, new EntityAILeaderFindAttackTarget(this, 50));
 		this.tasks.addTask(2, new EntityAILeaderStackMembers(this));
-		this.tasks.addTask(1,  new EntityAIAvoidEntity(this, EntityPlayer.class, 5.0F, 0.8D, 0.5D));
+		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityPlayer.class, 5.0F, 0.8D, 0.5D));
 		
 	}
 	@Override
@@ -67,7 +61,7 @@ public class EntityPawnCommander extends MaDEntityMonsterBase {
 		super.onUpdate();
 		if(this.party_attack_target != null)
 		{
-			if(this.getDistanceSqToEntity(party_attack_target) > 360)
+			if(this.getDistanceSq(party_attack_target) > 360)
 			{
 				this.faceEntity(party_attack_target, 1f, 1f);
 				this.getNavigator().tryMoveToEntityLiving(party_attack_target, 0.6f);

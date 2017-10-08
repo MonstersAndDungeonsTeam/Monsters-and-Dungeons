@@ -257,7 +257,7 @@ public class ModelCommanderPawn extends MaDEntityModelBase
 		this.leftFoot.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount / f;
 
 		EntityPawnCommander pawn =  (EntityPawnCommander) entityIn;
-		List<EntityWhitePawns> nearby_pawns = pawn.worldObj.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(pawn.getPosition().getX() - 15, pawn.getPosition().getY() - 15, pawn.getPosition().getZ() - 15, pawn.getPosition().getX() + 15, pawn.getPosition().getY() + 15, pawn.getPosition().getZ() + 15));
+		List<EntityWhitePawns> nearby_pawns = pawn.world.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(pawn.getPosition().getX() - 15, pawn.getPosition().getY() - 15, pawn.getPosition().getZ() - 15, pawn.getPosition().getX() + 15, pawn.getPosition().getY() + 15, pawn.getPosition().getZ() + 15));
 
 		if(nearby_pawns.size() > 0)
 		{

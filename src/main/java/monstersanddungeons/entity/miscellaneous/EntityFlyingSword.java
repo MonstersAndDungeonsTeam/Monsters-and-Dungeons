@@ -1,24 +1,12 @@
 package monstersanddungeons.entity.miscellaneous;
 
-import java.util.List;
 import java.util.Random;
 
 import monstersanddungeons.entity.MaDEntityMonsterBase;
-import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
-import monstersanddungeons.packet.MaDPacketHandler;
-import monstersanddungeons.packet.UpdateClientEntityAnimation;
-import monstersanddungeons.util.entity.IMaDBoss;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
 public class EntityFlyingSword extends MaDEntityMonsterBase{
@@ -48,9 +36,9 @@ public class EntityFlyingSword extends MaDEntityMonsterBase{
 	@Override
 	protected void damageEntity(DamageSource damageSrc, float damageAmount) 
 	{
-		if(damageSrc.getEntity() != null)
+		if(damageSrc.getTrueSource() != null)
 		{
-			if(damageSrc.getEntity() instanceof EntityPlayer)
+			if(damageSrc.getTrueSource() instanceof EntityPlayer)
 			{
 				super.damageEntity(damageSrc, damageAmount);
 			}
@@ -83,7 +71,7 @@ public class EntityFlyingSword extends MaDEntityMonsterBase{
 			if(this.attackCD == 0)
 			{
 				Random rand = new Random();
-				EntityPlayer player = this.worldObj.getNearestAttackablePlayer(this.getPosition(), 60, 30);
+				EntityPlayer player = this.world.getNearestAttackablePlayer(this.getPosition(), 60, 30);
 				if(player != null)
 					this.getNavigator().tryMoveToEntityLiving(player, 1f);
 
@@ -109,7 +97,7 @@ public class EntityFlyingSword extends MaDEntityMonsterBase{
 	public void acivateAnimationby(int animation, int phase) {
 		// TODO Auto-generated method stub
 
-		this.isSevenSword = (EntityAutomatonsRookBoss) worldObj.getEntityByID(animation);
+		this.isSevenSword = (EntityAutomatonsRookBoss) world.getEntityByID(animation);
 	}
 
 	@Override

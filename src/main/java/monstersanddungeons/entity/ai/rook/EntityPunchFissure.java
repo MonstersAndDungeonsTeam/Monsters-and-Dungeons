@@ -2,15 +2,14 @@ package monstersanddungeons.entity.ai.rook;
 
 import java.util.List;
 
-import net.minecraft.block.state.IBlockState;
+import monstersanddungeons.client.models.ModelAutomatonsRookBoss;
+import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
+import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
-import monstersanddungeons.client.models.ModelAutomatonsRookBoss;
-import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
-import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
 
 public class EntityPunchFissure extends EntitySpecialAttackBase<ModelAutomatonsRookBoss, EntityAutomatonsRookBoss>{
 

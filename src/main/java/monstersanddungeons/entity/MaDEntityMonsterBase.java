@@ -6,7 +6,11 @@ import monstersanddungeons.blocks.MaDBlocksHandler;
 import monstersanddungeons.tileentity.miscellaneous.TileEntityMonsterStatue;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -40,8 +44,8 @@ public abstract class MaDEntityMonsterBase extends EntityMob
 				{
 					TileEntityMonsterStatue statue = new TileEntityMonsterStatue(this);
 	
-					worldObj.setBlockState(this.getPosition().up(), MaDBlocksHandler.BlockEntityStatue.getDefaultState());
-					worldObj.setTileEntity(this.getPosition().up(), statue);
+					world.setBlockState(this.getPosition().up(), MaDBlocksHandler.BlockEntityStatue.getDefaultState());
+					world.setTileEntity(this.getPosition().up(), statue);
 	
 					this.setDead();
 				}
@@ -55,7 +59,7 @@ public abstract class MaDEntityMonsterBase extends EntityMob
 
 	public boolean isPlayerNearby()
 	{
-		List<EntityPlayer> entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPosition().getX() - 50, this.getPosition().getY() - 50, this.getPosition().getZ() - 50, this.getPosition().getX() + 50, this.getPosition().getY() + 50, this.getPosition().getZ() + 50));
+		List<EntityPlayer> entities = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPosition().getX() - 50, this.getPosition().getY() - 50, this.getPosition().getZ() - 50, this.getPosition().getX() + 50, this.getPosition().getY() + 50, this.getPosition().getZ() + 50));
 
 		if (entities.isEmpty())
 		{
@@ -83,6 +87,15 @@ public abstract class MaDEntityMonsterBase extends EntityMob
 	public boolean turnsIntoBlock()
 	{
 		return true;
+	}
+
+	protected boolean processInteract(EntityPlayer player, EnumHand hand, ItemStack stack) {
+		return super.processInteract(player, hand);
+	}
+
+	@Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn){
+		return null;
 	}
 
 }

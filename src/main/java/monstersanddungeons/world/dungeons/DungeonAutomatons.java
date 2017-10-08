@@ -140,7 +140,7 @@ public class DungeonAutomatons  extends Dungeon{
 					default:
 						break;
 					}
-					world.spawnEntityInWorld(rook);
+					world.spawnEntity(rook);
 					
 					hasBuiltBossRoom = false;
 					DungeonRoom.clearDungeonRoom();

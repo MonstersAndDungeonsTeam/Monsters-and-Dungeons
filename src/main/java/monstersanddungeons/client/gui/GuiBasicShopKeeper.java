@@ -72,7 +72,7 @@ public class GuiBasicShopKeeper extends GuiScreen
 		this.drawModalRectWithCustomSizedTexture(guiX , guiY, 0, 0, 256, 230, 256, 256);
 
 		RenderHelper.enableGUIStandardItemLighting();
-		this.fontRendererObj.drawString("Trading Scroll", guiX + 100, guiY + 15, 0xffffff); 
+		this.fontRenderer.drawString("Trading Scroll", guiX + 100, guiY + 15, 0xffffff); 
 
 		for(int i = 0; i < shopItems.size(); i ++)
 		{
@@ -85,8 +85,8 @@ public class GuiBasicShopKeeper extends GuiScreen
 					itemRender.renderItemAndEffectIntoGUI(item.getCost_item(), guiX + 100, guiY + 42 + 30* i);
 					itemRender.renderItemAndEffectIntoGUI(item.getTrade_item(), guiX+ 160, guiY + 42 + 30 * i);	
 
-					this.fontRendererObj.drawString("x " + item.getCost_item().stackSize + " - >", guiX + 117, guiY + 50 + 30* i, 0xffffff); 
-					this.fontRendererObj.drawString("x " + item.getTrade_item().stackSize, guiX+ 177, guiY + 50 + 30 * i, 0xffffff); 
+					this.fontRenderer.drawString("x " + item.getCost_item().getCount() + " - >", guiX + 117, guiY + 50 + 30* i, 0xffffff); 
+					this.fontRenderer.drawString("x " + item.getTrade_item().getCount(), guiX+ 177, guiY + 50 + 30 * i, 0xffffff); 
 				}
 			}
 		}
@@ -109,13 +109,13 @@ public class GuiBasicShopKeeper extends GuiScreen
 		case 6:
 		case 7:
 		case 8:
-			if(this.shopItems.get(button.id).canTradeItem(Minecraft.getMinecraft().thePlayer))
+			if(this.shopItems.get(button.id).canTradeItem(Minecraft.getMinecraft().player))
 			{
 				MaDPacketHandler.INSTANCE.sendToServer(new GivePlayerItem(shopKeeper.getShopID(), button.id));
 			}else
 			{
-				Minecraft.getMinecraft().thePlayer.closeScreen();
-				Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new TextComponentString("Dont waste my time..."));	
+				Minecraft.getMinecraft().player.closeScreen();
+				Minecraft.getMinecraft().player.sendMessage(new TextComponentString("Dont waste my time..."));	
 			}
 			break;
 		}

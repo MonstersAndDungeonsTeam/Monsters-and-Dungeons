@@ -1,8 +1,6 @@
 package monstersanddungeons.client.models;
 
-import monstersanddungeons.client.models.items.ModelQuartzWarHammer;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRook;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;

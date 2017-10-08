@@ -11,8 +11,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
-import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -106,7 +104,7 @@ public class EntityHammerHeavySwings extends EntitySpecialAttackBase<ModelAutoma
 	@Override
 	public void activateEffect(int animationNumber, EntityAutomatonsRookBoss bossEntity) 
 	{
-		World world = bossEntity.worldObj;
+		World world = bossEntity.world;
 		if(animationNumber == 40)
 		{
 			List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(bossEntity, new AxisAlignedBB(bossEntity.getPosition().getX() - 5, bossEntity.getPosition().getY() - 5, bossEntity.getPosition().getZ() - 5, bossEntity.getPosition().getX() + 5, bossEntity.getPosition().getY() + 5, bossEntity.getPosition().getZ() + 5));

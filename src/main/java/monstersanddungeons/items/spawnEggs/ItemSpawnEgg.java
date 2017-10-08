@@ -9,9 +9,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -38,18 +40,20 @@ public class ItemSpawnEgg extends Item
 			s = s + entityName;
 		}
 		return s;
-}
+	}
+	
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+		ItemStack stack = playerIn.getHeldItem(handIn);
 		if(!worldIn.isRemote)
 		{
-			this.spawnCreature(worldIn, itemStackIn.getItemDamage(), playerIn.posX, playerIn.posY, playerIn.posZ);
+			this.spawnCreature(worldIn, stack.getItemDamage(), playerIn.posX, playerIn.posY, playerIn.posZ);
 		}
 
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
+
 
 	public Entity spawnCreature(World world, int entityID, double x, double y, double z) {
 		
@@ -64,7 +68,7 @@ public class ItemSpawnEgg extends Item
 				entityliving.rotationYawHead = entityliving.rotationYaw;
 				entityliving.renderYawOffset = entityliving.rotationYaw;
 				entityliving.setPosition(x, y, z);
-				world.spawnEntityInWorld(entity);
+				world.spawnEntity(entity);
 				entityliving.playLivingSound();
 			}
 		}
@@ -73,8 +77,7 @@ public class ItemSpawnEgg extends Item
 	}
 
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
-
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		Iterator<Class<? extends Entity>> iterator = MaDEntityList.entityEggs.keySet().iterator();
 		
 		while (iterator.hasNext()) {
@@ -84,7 +87,7 @@ public class ItemSpawnEgg extends Item
 			
 			if (colors != null && colors.size() == 2) 
 			{	
-				itemList.add(new ItemStack(item, 1, MaDEntityList.getEntityId(oclass)));
+				items.add(new ItemStack(this, 1, MaDEntityList.getEntityId(oclass)));
 			}
 		}
 	}

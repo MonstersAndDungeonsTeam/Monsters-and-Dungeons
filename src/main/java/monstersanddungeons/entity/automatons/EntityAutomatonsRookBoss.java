@@ -4,21 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import monstersanddungeons.entity.MaDEntityMonsterBase;
 import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
 import monstersanddungeons.entity.ai.rook.EntityHammerFireSwing;
@@ -31,7 +16,6 @@ import monstersanddungeons.entity.ai.rook.EntityPunchFissure;
 import monstersanddungeons.entity.ai.rook.EntitySevenSwordSlash;
 import monstersanddungeons.entity.ai.rook.EntitySlam;
 import monstersanddungeons.entity.ai.rook.EntitySwordCrossSlash;
-import monstersanddungeons.entity.ai.rook.EntitySwordFall;
 import monstersanddungeons.entity.ai.rook.EntitySwordFlurrySlash;
 import monstersanddungeons.entity.miscellaneous.EntityFlyingSword;
 import monstersanddungeons.entity.miscellaneous.EntitySafeZone;
@@ -41,6 +25,17 @@ import monstersanddungeons.packet.UpdateClientEntityAnimation;
 import monstersanddungeons.sound.MaDSoundsHandler;
 import monstersanddungeons.util.Reference;
 import monstersanddungeons.util.entity.IMaDBoss;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IMaDBoss{
 
@@ -68,7 +63,7 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 	}
 	
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource damageSrc) {
 		return MaDSoundsHandler.automatonHurtStone;
 	}
 
@@ -114,20 +109,20 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 	@Override
 	public void activatePhase(int phase) 
 	{
-		List<Entity> entities = worldObj.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(getPosition().getX() - 50, getPosition().getY() - 50, getPosition().getZ() - 50, getPosition().getX() + 50, getPosition().getY() + 50, getPosition().getZ() + 50));
+		List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(getPosition().getX() - 50, getPosition().getY() - 50, getPosition().getZ() - 50, getPosition().getX() + 50, getPosition().getY() + 50, getPosition().getZ() + 50));
 
 		for(Entity entity : entities)
 		{
 			if(entity instanceof EntityPlayer)
 			{
-				if(!worldObj.isRemote)
+				if(!world.isRemote)
 				{
-					EntityFlyingSword sword = new EntityFlyingSword(this.worldObj);
-					EntityFlyingSword sword1 = new EntityFlyingSword(this.worldObj);
+					EntityFlyingSword sword = new EntityFlyingSword(this.world);
+					EntityFlyingSword sword1 = new EntityFlyingSword(this.world);
 					sword1.setPosition(entity.posX, entity.posY, entity.posZ);
 					sword.setPosition(entity.posX, entity.posY, entity.posZ);
-					worldObj.spawnEntityInWorld(sword);
-					worldObj.spawnEntityInWorld(sword1);
+					world.spawnEntity(sword);
+					world.spawnEntity(sword1);
 				}
 			}
 		}
@@ -162,11 +157,11 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 		{
 			if(!damageSrc.isExplosion() && !damageSrc.isFireDamage() && !damageSrc.isProjectile() && !damageSrc.isMagicDamage())
 			{
-				if(!damageSrc.getDamageType().contains(damageSrc.fall.getDamageType()))
+				if(damageSrc.getDamageType().contains(DamageSource.FALL.getDamageType()))
 				{
-					if(damageSrc.getEntity() != null)
+					if(damageSrc.getTrueSource() != null)
 					{
-						if(damageSrc.getEntity() instanceof EntityPlayer)
+						if(damageSrc.getTrueSource() instanceof EntityPlayer)
 						{
 							super.damageEntity(damageSrc, damageAmount);
 						}
@@ -211,7 +206,7 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 	public void onDeath(DamageSource cause) {
 		super.onDeath(cause);
 		
-		List<MaDEntityMonsterBase> all = worldObj.getEntitiesWithinAABB(MaDEntityMonsterBase.class,  new AxisAlignedBB(getPosition().getX() - 50, getPosition().getY() - 50, getPosition().getZ() - 50, getPosition().getX() + 50, getPosition().getY() + 50, getPosition().getZ() + 50));
+		List<MaDEntityMonsterBase> all = world.getEntitiesWithinAABB(MaDEntityMonsterBase.class,  new AxisAlignedBB(getPosition().getX() - 50, getPosition().getY() - 50, getPosition().getZ() - 50, getPosition().getX() + 50, getPosition().getY() + 50, getPosition().getZ() + 50));
 		
 		for(MaDEntityMonsterBase entity : all)
 		{
@@ -259,14 +254,14 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 	public void spawnFlyingSwords(BlockPos basePosition)
 	{
 		this.despawnFlyingSwords();
-		EntityFlyingSword sword_1 = new EntityFlyingSword(this.worldObj, this);
-		EntityFlyingSword sword_2 = new EntityFlyingSword(this.worldObj, this);
-		EntityFlyingSword sword_3 = new EntityFlyingSword(this.worldObj, this);
-		EntityFlyingSword sword_4 = new EntityFlyingSword(this.worldObj, this);
-		EntityFlyingSword sword_5 = new EntityFlyingSword(this.worldObj, this);
-		EntityFlyingSword sword_6 = new EntityFlyingSword(this.worldObj, this);
-		EntityFlyingSword sword_7 = new EntityFlyingSword(this.worldObj, this);
-		EntityFlyingSword sword_8 = new EntityFlyingSword(this.worldObj, this);
+		EntityFlyingSword sword_1 = new EntityFlyingSword(this.world, this);
+		EntityFlyingSword sword_2 = new EntityFlyingSword(this.world, this);
+		EntityFlyingSword sword_3 = new EntityFlyingSword(this.world, this);
+		EntityFlyingSword sword_4 = new EntityFlyingSword(this.world, this);
+		EntityFlyingSword sword_5 = new EntityFlyingSword(this.world, this);
+		EntityFlyingSword sword_6 = new EntityFlyingSword(this.world, this);
+		EntityFlyingSword sword_7 = new EntityFlyingSword(this.world, this);
+		EntityFlyingSword sword_8 = new EntityFlyingSword(this.world, this);
 
 		sword_2.setPosition(basePosition.getX() + 10, basePosition.getY(), basePosition.getZ() + 10);
 		sword_4.setPosition(basePosition.getX() - 10, basePosition.getY(), basePosition.getZ() - 10);
@@ -278,7 +273,7 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 		sword_5.setPosition(basePosition.getX() + 10, basePosition.getY(), basePosition.getZ());
 		sword_6.setPosition(basePosition.getX(), basePosition.getY(), basePosition.getZ()+10);
 
-		this.worldObj.addWeatherEffect(new EntityLightningBolt(this.worldObj, basePosition.getX(), basePosition.getY(), basePosition.getZ(), true));
+		this.world.addWeatherEffect(new EntityLightningBolt(this.world, basePosition.getX(), basePosition.getY(), basePosition.getZ(), true));
 		this.flying_sword.add(sword_1);
 		this.flying_sword.add(sword_2);
 		this.flying_sword.add(sword_3);
@@ -288,29 +283,29 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 		this.flying_sword.add(sword_7);
 		this.flying_sword.add(sword_8);
 
-		worldObj.spawnEntityInWorld(sword_1);
-		worldObj.spawnEntityInWorld(sword_2);
-		worldObj.spawnEntityInWorld(sword_3);
-		worldObj.spawnEntityInWorld(sword_4);
-		worldObj.spawnEntityInWorld(sword_5);
-		worldObj.spawnEntityInWorld(sword_6);
-		worldObj.spawnEntityInWorld(sword_7);
-		worldObj.spawnEntityInWorld(sword_8);
+		world.spawnEntity(sword_1);
+		world.spawnEntity(sword_2);
+		world.spawnEntity(sword_3);
+		world.spawnEntity(sword_4);
+		world.spawnEntity(sword_5);
+		world.spawnEntity(sword_6);
+		world.spawnEntity(sword_7);
+		world.spawnEntity(sword_8);
 	}
 
 	public void spawnSafeZones()
 	{
-		List<EntityPlayer> entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPosition().getX() - 50, this.getPosition().getY() - 50, this.getPosition().getZ() - 50, this.getPosition().getX() + 50, this.getPosition().getY() + 50, this.getPosition().getZ() + 50));
+		List<EntityPlayer> entities = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPosition().getX() - 50, this.getPosition().getY() - 50, this.getPosition().getZ() - 50, this.getPosition().getX() + 50, this.getPosition().getY() + 50, this.getPosition().getZ() + 50));
 
 		//	despawnSafeZones();
 
 		for(int i = 0; i < entities.size(); i ++)
 		{
-			EntitySafeZone zone = new EntitySafeZone(this.worldObj, this);
+			EntitySafeZone zone = new EntitySafeZone(this.world, this);
 			BlockPos pos = getRandomPosition();
 			zone.setPosition(pos.getX(), pos.getY(), pos.getZ());
 			this.zones.add(zone);
-			worldObj.spawnEntityInWorld(zone);
+			world.spawnEntity(zone);
 		}
 	}
 
@@ -342,7 +337,7 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 
 			pos = new BlockPos(this.posX + xCoord, this.posY, this.posZ + zCoord);
 
-			if(this.worldObj.getBlockState(pos.up()).getBlock().equals(Blocks.AIR))
+			if(this.world.getBlockState(pos.up()).getBlock().equals(Blocks.AIR))
 			{
 				satisfied = !this.isCloseToSafeZone(pos);
 			}
@@ -385,7 +380,7 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 		this.currentAttack.resetAnimation();
 		this.currentAttack = null;	
 
-		if(!this.worldObj.isRemote)
+		if(!this.world.isRemote)
 			MaDPacketHandler.INSTANCE.sendToAll(new UpdateClientEntityAnimation(this, 0, this.getPhase(),true));
 	}
 
@@ -395,13 +390,13 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 
 		int special = rand.nextInt(this.allAttacks.length);
 
-		if(this.allAttacks[special].shouldActivate(worldObj, this))
+		if(this.allAttacks[special].shouldActivate(world, this))
 		{
 			this.currentAttack = this.allAttacks[special];
 			this.attackCD = 240;
 			this.animationNumber = this.currentAttack.getExpectedTicks();
 
-			if(!this.worldObj.isRemote)
+			if(!this.world.isRemote)
 				MaDPacketHandler.INSTANCE.sendToAll(new UpdateClientEntityAnimation(this, special, this.getPhase()));
 		}	
 	}
@@ -411,13 +406,13 @@ public class EntityAutomatonsRookBoss extends MaDEntityMonsterBase implements IM
 	public void onUpdate() {
 		super.onUpdate();
 
-		if(!this.worldObj.isRemote)
+		if(!this.world.isRemote)
 		{
 			if(this.currentAttack != null)
 			{
 				if(this.animationNumber == 0)
 				{
-					this.currentAttack.applyDamage(animationNumber,this.worldObj ,this);
+					this.currentAttack.applyDamage(animationNumber,this.world ,this);
 					this.resetAnimation();
 				}else
 				{

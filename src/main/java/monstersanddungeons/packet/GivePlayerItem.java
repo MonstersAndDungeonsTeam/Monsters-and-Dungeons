@@ -29,8 +29,8 @@ public class GivePlayerItem implements IMessage, IMessageHandler<GivePlayerItem,
 	@Override
 	public IMessage onMessage(final GivePlayerItem message, MessageContext ctx) 
 	{
-		EntityPlayer player = ctx.getServerHandler().playerEntity;
-		World world = player.worldObj;
+		EntityPlayer player = ctx.getServerHandler().player;
+		World world = player.world;
 		
 		IMaDShopKeeper shopkeeper = (IMaDShopKeeper) world.getEntityByID(message.shop_keeperID);
 		

@@ -1,10 +1,16 @@
 package monstersanddungeons.world.dungeons_new;
 
-import java.util.List;
 import java.util.Random;
 
-import com.google.common.base.Predicate;
-
+import monstersanddungeons.blocks.MaDBlocksHandler;
+import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
+import monstersanddungeons.entity.automatons.EntityPawnCommander;
+import monstersanddungeons.entity.automatons.EntityWhitePawns;
+import monstersanddungeons.tileentity.miscellaneous.TileEntityMonsterStatue;
+import monstersanddungeons.util.dungeon.EnumDirection;
+import monstersanddungeons.util.dungeon_new.DungeonExit_new;
+import monstersanddungeons.util.dungeon_new.DungeonRoom_new;
+import monstersanddungeons.util.dungeon_new.MaDDungeonBase;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -15,16 +21,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTableList;
-import monstersanddungeons.blocks.MaDBlocksHandler;
-import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
-import monstersanddungeons.entity.automatons.EntityPawnCommander;
-import monstersanddungeons.entity.automatons.EntityWhitePawns;
-import monstersanddungeons.tileentity.miscellaneous.TileEntityMonsterStatue;
-import monstersanddungeons.util.dungeon.EnumDirection;
-import monstersanddungeons.util.dungeon_new.DungeonExit_new;
-import monstersanddungeons.util.dungeon_new.DungeonPath;
-import monstersanddungeons.util.dungeon_new.DungeonRoom_new;
-import monstersanddungeons.util.dungeon_new.MaDDungeonBase;
 
 public class DungeonAutomatons extends MaDDungeonBase{
 

@@ -1,6 +1,5 @@
 package monstersanddungeons.client.renderer;
 
-import monstersanddungeons.entity.automatons.EntityWhitePawns;
 import monstersanddungeons.util.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;

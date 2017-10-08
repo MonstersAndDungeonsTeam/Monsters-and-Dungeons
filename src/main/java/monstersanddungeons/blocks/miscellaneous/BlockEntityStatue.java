@@ -10,22 +10,20 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-
 
 public class BlockEntityStatue extends Block implements ITileEntityProvider {
 
 	public BlockEntityStatue(String name) {
 		super(Material.WOOD);
-		
-		
+
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		
+
 		GameRegistry.register(this);
-		
+
 		// TODO Auto-generated constructor stub
 	}
 
@@ -34,19 +32,18 @@ public class BlockEntityStatue extends Block implements ITileEntityProvider {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public BlockRenderLayer getBlockLayer() {
 		// TODO Auto-generated method stub
 		return BlockRenderLayer.CUTOUT;
 	}
-
+	
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World worldIn, BlockPos pos)
-	{
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return NULL_AABB;
 	}
-	
+
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState iBlockState) {
 		return EnumBlockRenderType.INVISIBLE;
@@ -58,4 +55,3 @@ public class BlockEntityStatue extends Block implements ITileEntityProvider {
 		return new TileEntityMonsterStatue();
 	}
 }
-

@@ -3,12 +3,14 @@ package monstersanddungeons.items.armor;
 import java.util.List;
 
 import monstersanddungeons.util.Reference;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMaDArmor extends ItemArmor {
@@ -35,10 +37,10 @@ public class ItemMaDArmor extends ItemArmor {
 	public List<ArmorStat> getSetBonusStats(){
 		return null;
 	}
-	
+
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-		super.addInformation(stack, playerIn, tooltip, advanced);
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 		if(getArmorMaterial() != null && !getArmorStats().isEmpty()){
 			for(ArmorStat stat : getArmorStats()){
 				tooltip.add(TextFormatting.BLUE + "+" + stat.getPower() + " " + stat.getStat().getName());

@@ -1,6 +1,5 @@
 package monstersanddungeons.client.renderer;
 
-import monstersanddungeons.client.models.ModelMarshDweller;
 import monstersanddungeons.client.models.ModelMarshDwellerFisherman;
 import monstersanddungeons.util.Reference;
 import net.minecraft.client.Minecraft;

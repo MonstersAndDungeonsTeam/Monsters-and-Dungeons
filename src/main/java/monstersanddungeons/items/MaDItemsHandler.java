@@ -11,8 +11,6 @@ import monstersanddungeons.items.spawnEggs.ItemSpawnEggColourHandler;
 import monstersanddungeons.items.weapon.ItemQuartzGreatSword;
 import monstersanddungeons.items.weapon.ItemQuartzWarHammer;
 import monstersanddungeons.stats.Stats;
-import monstersanddungeons.testing.ItemTestSword;
-import monstersanddungeons.testing.TestSwordColourHandler;
 import monstersanddungeons.util.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -26,81 +24,64 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+public class MaDItemsHandler {
+	public static ToolMaterial toolMaterialQuartz = EnumHelper.addToolMaterial("RomanSpartanExample", 3, 1000, 15.0F,
+			4.0F, 30);
 
+	public static ArmorMaterial armorMaterialQuartz = EnumHelper.addArmorMaterial("RomanSpartanArmorExample",
+			"wc:RomanArmor", 16, new int[] { 3, 8, 6, 3 }, 20, null, 1f);
 
-public class MaDItemsHandler 
-{
-	public static ToolMaterial toolMaterialQuartz = EnumHelper.addToolMaterial("RomanSpartanExample", 3, 1000, 15.0F, 4.0F, 30);
-	
-	public static ArmorMaterial armorMaterialQuartz = EnumHelper.addArmorMaterial("RomanSpartanArmorExample", "wc:RomanArmor", 16, new int[] {3, 8, 6, 3}, 20, null, 1f);
+	public static Item quartzHelmet, quartzChest, quartzLegs, quartzBoots, quartzShield, quartzWarhammer,
+			quartzGreatSword, spawnPawn;
 
-	public static Item quartzHelmet, quartzChest, quartzLegs, quartzBoots, quartzShield, quartzWarhammer, quartzGreatSword, spawnPawn;
-
-	public static Item TEST;
-	
-	public static void init()
-	{
-		quartzHelmet = new ItemQuartzArmor(armorMaterialQuartz , 1,  EntityEquipmentSlot.HEAD, "quartzHelmet", new ArmorStat[]{new ArmorStat(Stats.strength), new ArmorStat(Stats.wisdom)});
-		quartzChest  = new ItemQuartzArmor(armorMaterialQuartz , 1, EntityEquipmentSlot.CHEST, "quartzChest", new ArmorStat[]{new ArmorStat(Stats.strength, 3)});
-		quartzLegs =  new ItemQuartzArmor(armorMaterialQuartz , 1, EntityEquipmentSlot.LEGS, "quartzLegs", new ArmorStat[]{new ArmorStat(Stats.strength, 2)});
-		quartzBoots = new ItemQuartzArmor(armorMaterialQuartz , 1, EntityEquipmentSlot.FEET, "quartzBoots", new ArmorStat[]{new ArmorStat(Stats.strength)});
+	public static void init() {
+		quartzHelmet = new ItemQuartzArmor(armorMaterialQuartz, 1, EntityEquipmentSlot.HEAD, "quartzHelmet",
+				new ArmorStat[] { new ArmorStat(Stats.strength), new ArmorStat(Stats.wisdom) });
+		quartzChest = new ItemQuartzArmor(armorMaterialQuartz, 1, EntityEquipmentSlot.CHEST, "quartzChest",
+				new ArmorStat[] { new ArmorStat(Stats.strength, 3) });
+		quartzLegs = new ItemQuartzArmor(armorMaterialQuartz, 1, EntityEquipmentSlot.LEGS, "quartzLegs",
+				new ArmorStat[] { new ArmorStat(Stats.strength, 2) });
+		quartzBoots = new ItemQuartzArmor(armorMaterialQuartz, 1, EntityEquipmentSlot.FEET, "quartzBoots",
+				new ArmorStat[] { new ArmorStat(Stats.strength) });
 		quartzShield = new ItemQuartzShield("quartzShield");
-		
+
 		quartzWarhammer = new ItemQuartzWarHammer(toolMaterialQuartz, "quartzWarhammer");
 		quartzGreatSword = new ItemQuartzGreatSword(toolMaterialQuartz, "quartzGreatSword");
-		
-		TEST = new ItemTestSword(toolMaterialQuartz, "TEST");
-		
+
 		spawnPawn = new ItemSpawnEgg("SpawnEgg");
 	}
 
-	public static void registerRenders()
-	{
+	public static void registerRenders() {
 
 		registerRender(quartzHelmet);
 		registerRender(quartzChest);
 		registerRender(quartzLegs);
 		registerRender(quartzBoots);
 		registerRender(quartzShield);
-		
+
 		registerRender(quartzWarhammer);
 		registerRender(quartzGreatSword);
-	
-		
-		registerRender(spawnPawn, true);
-	
-		List<ItemStack> allitems = new ArrayList<ItemStack>();
-		TEST.getSubItems(TEST, null, allitems);
 
-		for(int i = 0; i < allitems.size() + 1; i ++)
-		{
-			ModelLoader.setCustomModelResourceLocation(TEST, i, new ModelResourceLocation(Reference.MODID + ":TEST0", "inventory"));
-		//	Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(TEST, i, new ModelResourceLocation(Reference.MODID + ":TEST0", "inventory"));
-			Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new TestSwordColourHandler(), TEST);
-		}
+		registerRender(spawnPawn, true);
 	}
 
-	public static void registerRender(Item item)
-	{
+	public static void registerRender(Item item) {
 		registerRender(item, false);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
-	public static void registerRender(Item item, boolean isEgg)
-	{
-		if(!isEgg)
-		{
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(Reference.MODID + ":" + item.getUnlocalizedName().substring(5),"inventory"));
-		}else
-		{
+	public static void registerRender(Item item, boolean isEgg) {
+		if (!isEgg) {
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(
+					Reference.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+		} else {
 			List<ItemStack> allitems = new ArrayList<ItemStack>();
 			item.getSubItems(item, null, allitems);
 
-			for(int i = 0; i < allitems.size() + 1; i ++)
-			{
+			for (int i = 0; i < allitems.size() + 1; i++) {
 				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, i, new ModelResourceLocation("minecraft:spawn_egg", "inventory"));
 				Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new ItemSpawnEggColourHandler(), item);
-			}	
+			}
 		}
 	}
 }

@@ -2,19 +2,16 @@ package monstersanddungeons.entity.ai.rook;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import monstersanddungeons.client.models.ModelAutomatonsRookBoss;
 import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
 import monstersanddungeons.entity.miscellaneous.EntityFlyingSword;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.World;
 
 public class EntitySevenSwordSlash extends EntitySpecialAttackBase<ModelAutomatonsRookBoss, EntityAutomatonsRookBoss> {
 
@@ -107,7 +104,7 @@ public class EntitySevenSwordSlash extends EntitySpecialAttackBase<ModelAutomato
 				{
 					if(bossEntity.getPosition().distanceSq(currentSword.getPosition().getX(), currentSword.getPosition().getY(), currentSword.getPosition().getZ()) <= 7)
 					{
-						bossEntity.worldObj.addWeatherEffect(new EntityLightningBolt(bossEntity.worldObj, bossEntity.getPosition().getX(), bossEntity.getPosition().getY(), bossEntity.getPosition().getZ(), true));
+						bossEntity.world.addWeatherEffect(new EntityLightningBolt(bossEntity.world, bossEntity.getPosition().getX(), bossEntity.getPosition().getY(), bossEntity.getPosition().getZ(), true));
 						currentSword.setDead();
 						this.currentSword = null;
 
@@ -116,7 +113,7 @@ public class EntitySevenSwordSlash extends EntitySpecialAttackBase<ModelAutomato
 				}
 			}
 
-			List<Entity> entities = bossEntity.worldObj.getEntitiesWithinAABBExcludingEntity(bossEntity, new AxisAlignedBB(bossEntity.getPosition().getX() -3, bossEntity.getPosition().getY() -3, bossEntity.getPosition().getZ() -3, bossEntity.getPosition().getX() +3, bossEntity.getPosition().getY() +3, bossEntity.getPosition().getZ() +3));
+			List<Entity> entities = bossEntity.world.getEntitiesWithinAABBExcludingEntity(bossEntity, new AxisAlignedBB(bossEntity.getPosition().getX() -3, bossEntity.getPosition().getY() -3, bossEntity.getPosition().getZ() -3, bossEntity.getPosition().getX() +3, bossEntity.getPosition().getY() +3, bossEntity.getPosition().getZ() +3));
 
 			for(Entity entity : entities)
 			{

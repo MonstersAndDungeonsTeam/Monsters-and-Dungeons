@@ -42,7 +42,7 @@ public class ShopItem
 				{
 					if(stack.isItemEqual(cost_item))
 					{
-						if(stack.stackSize >= getCost_item().stackSize)
+						if(stack.getCount() >= getCost_item().getCount())
 						{
 							return true;
 						}
@@ -59,13 +59,13 @@ public class ShopItem
 		{
 			if(player.inventory.addItemStackToInventory(trade_item))
 			{
-				for(int i = 0; i < player.inventory.mainInventory.length; i ++)
+				for(int i = 0; i < player.inventory.mainInventory.size(); i ++)
 				{
-					if(player.inventory.mainInventory[i] != null)
+					if(player.inventory.mainInventory.get(i) != null)
 					{
-						if(player.inventory.mainInventory[i].isItemEqual(getCost_item()))
+						if(player.inventory.mainInventory.get(i).isItemEqual(getCost_item()))
 						{
-							player.inventory.decrStackSize(i, getCost_item().stackSize);
+							player.inventory.decrStackSize(i, getCost_item().getCount());
 							//this.stock--;
 							return;
 						}

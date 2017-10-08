@@ -1,10 +1,9 @@
 package monstersanddungeons.packet;
 
-import io.netty.buffer.ByteBuf;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import io.netty.buffer.ByteBuf;
 import monstersanddungeons.util.entity.IMaDShopKeeper;
 import monstersanddungeons.util.entity.ShopItem;
 import net.minecraft.client.Minecraft;
@@ -37,8 +36,8 @@ public class UpdateShopKeeperList implements IMessage, IMessageHandler<UpdateSho
 
 			@Override
 			public void run() {
-				EntityPlayer p = Minecraft.getMinecraft().thePlayer;
-				World world = p.worldObj;
+				EntityPlayer p = Minecraft.getMinecraft().player;
+				World world = p.world;
 				
 				IMaDShopKeeper keeper = (IMaDShopKeeper) world.getEntityByID(message.shopKeeper);
 				if(keeper != null)

@@ -5,27 +5,18 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.glu.GLU;
-import org.lwjgl.util.glu.Sphere;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.World;
 import monstersanddungeons.client.ClientProxy;
-import monstersanddungeons.client.models.ModelAutomatonsRook;
 import monstersanddungeons.client.models.ModelAutomatonsRookBoss;
 import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
-import monstersanddungeons.util.Reference;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.World;
 
 public class EntityPhantomHammerSmash extends EntitySpecialAttackBase<ModelAutomatonsRookBoss, EntityAutomatonsRookBoss> {
 
@@ -249,7 +240,7 @@ public class EntityPhantomHammerSmash extends EntitySpecialAttackBase<ModelAutom
 		
 		if(!this.spoken)
 		{
-			Minecraft.getMinecraft().thePlayer.addChatComponentMessage(new TextComponentString("Rook Boss: So tired..."));	
+			Minecraft.getMinecraft().player.sendMessage(new TextComponentString("Rook Boss: So tired..."));	
 			this.spoken = true;
 		}
 	}

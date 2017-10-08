@@ -73,7 +73,7 @@ public class EntityEnt extends MaDEntityMonsterBase implements IMaDBoss{
 		this.current_attack.resetAnimation();
 		this.current_attack = null;	
 
-		if(!this.worldObj.isRemote)
+		if(!this.world.isRemote)
 			MaDPacketHandler.INSTANCE.sendToAll(new UpdateClientEntityAnimation(this, 0, this.getPhase(),true));
 	}
 
@@ -167,13 +167,13 @@ public class EntityEnt extends MaDEntityMonsterBase implements IMaDBoss{
 
 		int special = rand.nextInt(this.allAttacks.length);
 
-		if(this.allAttacks[special].shouldActivate(worldObj, this))
+		if(this.allAttacks[special].shouldActivate(world, this))
 		{
 			this.current_attack = this.allAttacks[special];
 			this.attackCD = 240;
 			this.animationNumber = this.current_attack.getExpectedTicks();
 
-			if(!this.worldObj.isRemote)
+			if(!this.world.isRemote)
 				MaDPacketHandler.INSTANCE.sendToAll(new UpdateClientEntityAnimation(this, special, this.getPhase()));
 		}	
 	}
@@ -182,7 +182,7 @@ public class EntityEnt extends MaDEntityMonsterBase implements IMaDBoss{
 	public void onUpdate() {
 		super.onUpdate();
 
-		if(!this.worldObj.isRemote)
+		if(!this.world.isRemote)
 		{
 			if(this.getAttackingEntity() != null)
 			{
@@ -196,7 +196,7 @@ public class EntityEnt extends MaDEntityMonsterBase implements IMaDBoss{
 				{
 					if(this.animationNumber == 0)
 					{
-						this.current_attack.applyDamage(animationNumber,this.worldObj ,this);
+						this.current_attack.applyDamage(animationNumber,this.world ,this);
 						this.resetAnimation();
 					}else
 					{
@@ -211,7 +211,7 @@ public class EntityEnt extends MaDEntityMonsterBase implements IMaDBoss{
 					}else
 						this.attackCD--;
 					
-					EntityPlayer player = worldObj.getNearestAttackablePlayer(this, 20, 20);
+					EntityPlayer player = world.getNearestAttackablePlayer(this, 20, 20);
 					if(player != null)
 						this.getNavigator().tryMoveToEntityLiving(player, 0.5f);
 				}

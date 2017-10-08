@@ -1,7 +1,6 @@
 package monstersanddungeons.util.dungeon;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.EnumFaceDirection;
 
 public enum EnumDirection {
 	WEST(0, "WEST"),

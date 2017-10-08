@@ -18,7 +18,7 @@ public class EntityAIFindLeader extends EntityAIBase{
 	public EntityAIFindLeader(EntityWhitePawns pawn) 
 	{
 		this.pawn = pawn;
-		world = pawn.worldObj;
+		world = pawn.world;
 		this.setMutexBits(8);
 	}
 

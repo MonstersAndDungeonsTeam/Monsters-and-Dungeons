@@ -51,7 +51,7 @@ public class ItemGenBlockSlab extends ItemBlock
 
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (stack.stackSize != 0 && playerIn.canPlayerEdit(pos.offset(facing), facing, stack))
+        if (stack.getCount() != 0 && playerIn.canPlayerEdit(pos.offset(facing), facing, stack))
         {
             Comparable<?> comparable = this.singleSlab.getTypeForItem(stack);
             IBlockState iblockstate = worldIn.getBlockState(pos);
@@ -69,14 +69,14 @@ public class ItemGenBlockSlab extends ItemBlock
                     {
                         SoundType soundtype = this.doubleSlab.getSoundType(iblockstate1, worldIn, pos,playerIn);
                         worldIn.playSound(playerIn, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-                        --stack.stackSize;
+                        stack.grow(-1);
                     }
 
                     return EnumActionResult.SUCCESS;
                 }
             }
 
-            return this.tryPlace(playerIn, stack, worldIn, pos.offset(facing), comparable) ? EnumActionResult.SUCCESS : super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+            return this.tryPlace(playerIn, stack, worldIn, pos.offset(facing), comparable) ? EnumActionResult.SUCCESS : super.onItemUse(playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
         }
         else
         {
@@ -123,7 +123,7 @@ public class ItemGenBlockSlab extends ItemBlock
                 {
                     SoundType soundtype = this.doubleSlab.getSoundType(iblockstate1, worldIn, pos, player);
                     worldIn.playSound(player, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-                    --stack.stackSize;
+                    stack.grow(-1);
                 }
 
                 return true;

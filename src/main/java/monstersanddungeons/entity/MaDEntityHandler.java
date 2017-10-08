@@ -26,7 +26,6 @@ import monstersanddungeons.client.renderer.RenderWhitePawns;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRook;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
 import monstersanddungeons.entity.automatons.EntityPawnCommander;
-import monstersanddungeons.entity.automatons.EntityTameablePawn;
 import monstersanddungeons.entity.automatons.EntityWhitePawns;
 import monstersanddungeons.entity.marshdwellers.EntityMarshDweller;
 import monstersanddungeons.entity.marshdwellers.EntityMarshDwellerFisherman;
@@ -35,8 +34,11 @@ import monstersanddungeons.entity.miscellaneous.EntityFlyingSword;
 import monstersanddungeons.entity.miscellaneous.EntitySafeZone;
 import monstersanddungeons.entity.miscellaneous.EntitySunBeam;
 import monstersanddungeons.entity.world.EntityEnt;
+import monstersanddungeons.util.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -59,8 +61,6 @@ public class MaDEntityHandler {
 		registerEntity(EntityWhitePawns.class, "WhitePawns", 80, 3, false, 0xFFFFFF, 0x808080);
 		registerEntity(EntityPawnCommander.class, "PawnCommander", 80, 3, false, 0xFFFFFF, 0x000000);
 
-		registerEntity(EntityTameablePawn.class, "tameablePawn", 80, 3, false, 0xFFFFFF, 0x000000);
-
 		registerEntity(EntityMarshDweller.class, "MarshDweller", 80, 3, false, 0xFFFFFF, 0x000000);
 		registerEntity(EntityMarshDwellerFisherman.class, "MarshDwellerFisherman", 80, 3, false, 0xFFFFFF, 0x000000);
 		registerEntity(EntityMarshDwellerShaman.class, "MarshDwellerShaman", 80, 3, false, 0xFFFFFF, 0x000000);
@@ -71,12 +71,12 @@ public class MaDEntityHandler {
 	}
 
 	public static void addSpawns() {
-		EntityRegistry.addSpawn(EntityEnt.class, 100, 1, 1, EnumCreatureType.AMBIENT, BiomeDictionary.getBiomesForType(BiomeDictionary.Type.FOREST));
+		EntityRegistry.addSpawn(EntityEnt.class, 100, 1, 1, EnumCreatureType.AMBIENT, (Biome[]) BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).toArray());
 	}
 
 
 	private static void registerEntity(Class<? extends Entity> entityClass, String entityName, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates, int mainColor, int offColpr) {
-		EntityRegistry.registerModEntity(entityClass, entityName, entityID++, MonstersAndDungeons.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
+		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MODID, entityName), entityClass, entityName, entityID++, MonstersAndDungeons.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
 
 		long x = entityClass.hashCode();
 		Random random = new Random(x);
@@ -98,7 +98,6 @@ public class MaDEntityHandler {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityPawnCommander.class, new RenderCommanderPawn(new ModelCommanderPawn()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWhitePawns.class, new RenderWhitePawns(new ModelWitePawns()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityTameablePawn.class, new RenderWhitePawns(new ModelWitePawns()));		
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarshDweller.class, new RenderMarshDweller(new ModelMarshDweller()));		
 		RenderingRegistry.registerEntityRenderingHandler(EntityMarshDwellerFisherman.class, new RenderMarshDwellerFisherman(new ModelMarshDwellerFisherman()));		

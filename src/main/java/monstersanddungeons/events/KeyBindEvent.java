@@ -4,7 +4,6 @@ import org.lwjgl.input.Keyboard;
 
 import monstersanddungeons.client.ClientProxy;
 import monstersanddungeons.util.Structure;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.math.BlockPos;
@@ -33,21 +32,21 @@ public class KeyBindEvent {
 		if(key.isPressed()){
 			
 			//will set blockPos 1, (L)
-			ClientProxy.BlockPos1 = new BlockPos(Minecraft.getMinecraft().thePlayer.getPosition().getX(), Minecraft.getMinecraft().thePlayer.getPosition().getY(), Minecraft.getMinecraft().thePlayer.getPosition().getZ());
+			ClientProxy.BlockPos1 = new BlockPos(Minecraft.getMinecraft().player.getPosition().getX(), Minecraft.getMinecraft().player.getPosition().getY(), Minecraft.getMinecraft().player.getPosition().getZ());
 			
 			System.out.println("L:" +ClientProxy.BlockPos1);
-			System.out.println("Stair: " + Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(-609, 57, -361)).getBlock().getMetaFromState(Minecraft.getMinecraft().theWorld.getBlockState(new BlockPos(-609, 57, -361))));
+			System.out.println("Stair: " + Minecraft.getMinecraft().world.getBlockState(new BlockPos(-609, 57, -361)).getBlock().getMetaFromState(Minecraft.getMinecraft().world.getBlockState(new BlockPos(-609, 57, -361))));
 		}
 
 		if(key1.isPressed()){
 			//will set blockPos 2 (K)
-			ClientProxy.BlockPos2 = new BlockPos(Minecraft.getMinecraft().thePlayer.getPosition().getX(), Minecraft.getMinecraft().thePlayer.getPosition().getY(), Minecraft.getMinecraft().thePlayer.getPosition().getZ());
+			ClientProxy.BlockPos2 = new BlockPos(Minecraft.getMinecraft().player.getPosition().getX(), Minecraft.getMinecraft().player.getPosition().getY(), Minecraft.getMinecraft().player.getPosition().getZ());
 			System.out.println("K:" +ClientProxy.BlockPos2);
 		}
 
 		if(key2.isPressed()){
 			//will build the file and stuff (J)
-			Structure.StructureReaderFromWorld(Minecraft.getMinecraft().thePlayer.worldObj, ClientProxy.BlockPos1, ClientProxy.BlockPos2);
+			Structure.StructureReaderFromWorld(Minecraft.getMinecraft().world, ClientProxy.BlockPos1, ClientProxy.BlockPos2);
 		}
 	}
 }

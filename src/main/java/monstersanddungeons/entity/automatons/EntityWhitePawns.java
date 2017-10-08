@@ -7,7 +7,6 @@ import monstersanddungeons.entity.ai.pawn.EntityAIAttackGroupTarget;
 import monstersanddungeons.entity.ai.pawn.EntityAIAttackTarget;
 import monstersanddungeons.entity.ai.pawn.EntityAIFindLeader;
 import monstersanddungeons.entity.ai.pawn.EntityAIFollowLeader;
-import monstersanddungeons.entity.ai.pawn.EntityAILeaderFindAttackTarget;
 import monstersanddungeons.entity.ai.pawn.EntityAILeaderStackMembers;
 import monstersanddungeons.packet.MaDPacketHandler;
 import monstersanddungeons.packet.UpdateClientEntityAnimation;
@@ -17,7 +16,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -63,7 +62,7 @@ public class EntityWhitePawns extends MaDEntityMonsterBase
 	@Override
 	public boolean attackEntityAsMob(Entity entityIn) 
 	{
-		if(!this.worldObj.isRemote)
+		if(!this.world.isRemote)
 		{
 			this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D + 2 * EntityAILeaderStackMembers.getChainSize(this) + (this.group_leader != null ? 4D : 0D));
 			return super.attackEntityAsMob(entityIn);
@@ -82,7 +81,7 @@ public class EntityWhitePawns extends MaDEntityMonsterBase
 	}
 
 	@Override
-	protected SoundEvent getHurtSound() {
+	protected SoundEvent getHurtSound(DamageSource damageSrc) {
 		return MaDSoundsHandler.automatonHurtStone;
 	}
 	public int getHammer_attack_cd() {
@@ -134,7 +133,7 @@ public class EntityWhitePawns extends MaDEntityMonsterBase
 
 		if(pawn_check_cd == 0)
 		{
-			List<EntityWhitePawns> nearby_pawn = worldObj.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(getPosition().getX() - 15, getPosition().getY() - 15, getPosition().getZ() - 15, getPosition().getX() + 15, getPosition().getY() + 15, getPosition().getZ() + 15));
+			List<EntityWhitePawns> nearby_pawn = world.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(getPosition().getX() - 15, getPosition().getY() - 15, getPosition().getZ() - 15, getPosition().getX() + 15, getPosition().getY() + 15, getPosition().getZ() + 15));
 
 			if(nearby_pawn.size() > 1 || this.group_leader != null)
 			{
@@ -195,7 +194,7 @@ public class EntityWhitePawns extends MaDEntityMonsterBase
 				this.hammer_attack_cd ++;
 			}else
 			{
-				List<Entity> entities = worldObj.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(getPosition().getX() - 5, getPosition().getY() - 5, getPosition().getZ() - 5, getPosition().getX() + 5, getPosition().getY() + 5, getPosition().getZ() + 5));
+				List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(getPosition().getX() - 5, getPosition().getY() - 5, getPosition().getZ() - 5, getPosition().getX() + 5, getPosition().getY() + 5, getPosition().getZ() + 5));
 
 				for(Entity entity : entities)
 				{

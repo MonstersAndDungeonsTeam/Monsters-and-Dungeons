@@ -1,7 +1,6 @@
 package monstersanddungeons.entity.ai.pawn;
 
 import monstersanddungeons.entity.automatons.EntityPawnCommander;
-import monstersanddungeons.entity.automatons.EntityWhitePawns;
 import net.minecraft.entity.ai.EntityAIBase;
 
 public class EntityAILeaderFindAttackTarget extends EntityAIBase {
@@ -26,7 +25,7 @@ public class EntityAILeaderFindAttackTarget extends EntityAIBase {
 			{
 				this.startExecuting();
 				return true;
-			}else if(leader.party_attack_target.isDead || leader.getDistanceSqToEntity(leader.party_attack_target) > maxDistance)
+			}else if(leader.party_attack_target.isDead || leader.getDistanceSq(leader.party_attack_target) > maxDistance)
 			{
 				this.startExecuting();
 				return true;
@@ -39,6 +38,6 @@ public class EntityAILeaderFindAttackTarget extends EntityAIBase {
 	@Override
 	public void startExecuting() 
 	{
-		leader.party_attack_target = leader.worldObj.getClosestPlayerToEntity(leader, maxDistance);
+		leader.party_attack_target = leader.world.getClosestPlayerToEntity(leader, maxDistance);
 	}
 }

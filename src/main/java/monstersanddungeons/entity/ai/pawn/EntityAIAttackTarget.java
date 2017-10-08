@@ -24,7 +24,7 @@ public class EntityAIAttackTarget extends EntityAIBase
 	{
 		if(this.current.group_leader == null)
 		{
-			List<EntityWhitePawns> nearby_pawn = current.worldObj.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(current.getPosition().getX() - 15, current.getPosition().getY() - 15, current.getPosition().getZ() - 15, current.getPosition().getX() + 15, current.getPosition().getY() + 15, current.getPosition().getZ() + 15));
+			List<EntityWhitePawns> nearby_pawn = current.world.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(current.getPosition().getX() - 15, current.getPosition().getY() - 15, current.getPosition().getZ() - 15, current.getPosition().getX() + 15, current.getPosition().getY() + 15, current.getPosition().getZ() + 15));
 			if(nearby_pawn.size() > 1)
 			{
 				this.nearby_pawn = nearby_pawn;
@@ -38,12 +38,12 @@ public class EntityAIAttackTarget extends EntityAIBase
 	@Override
 	public void startExecuting() 
 	{
-		EntityPlayer player = current.worldObj.getNearestAttackablePlayer(current, 30, 30);
+		EntityPlayer player = current.world.getNearestAttackablePlayer(current, 30, 30);
 		if(player != null)
 		{
 			current.getNavigator().tryMoveToEntityLiving(player, 0.5f);
 
-			if(current.getDistanceSqToEntity(player) < 7)
+			if(current.getDistanceSq(player) < 7)
 			{
 				if(this.hammer_cd == 0)
 				{

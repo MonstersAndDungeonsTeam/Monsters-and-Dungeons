@@ -14,7 +14,6 @@ import net.minecraft.block.BlockOre;
 import net.minecraft.block.BlockRedstoneOre;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
@@ -116,12 +115,12 @@ public class DungeonRoom {
 								{
 									EntityPawnCommander pawn = new EntityPawnCommander(world);
 									pawn.setPosition(startPos.getX() + x, startPos.getY() + y,startPos.getZ() + z);
-									world.spawnEntityInWorld(pawn);
+									world.spawnEntity(pawn);
 								}else
 								{
 									EntityWhitePawns pawn = new EntityWhitePawns(world);
 									pawn.setPosition(startPos.getX() + x, startPos.getY() + y,startPos.getZ() + z);
-									world.spawnEntityInWorld(pawn);
+									world.spawnEntity(pawn);
 								}
 							}
 						}
@@ -170,12 +169,12 @@ public class DungeonRoom {
 								{
 									EntityPawnCommander pawn = new EntityPawnCommander(world);
 									pawn.setPosition(startPos.getX() - x, startPos.getY() + y,startPos.getZ() - z);
-									world.spawnEntityInWorld(pawn);
+									world.spawnEntity(pawn);
 								}else
 								{
 									EntityWhitePawns pawn = new EntityWhitePawns(world);
 									pawn.setPosition(startPos.getX() - x, startPos.getY() + y,startPos.getZ() - z);
-									world.spawnEntityInWorld(pawn);
+									world.spawnEntity(pawn);
 								}
 							}
 						}	
@@ -223,12 +222,12 @@ public class DungeonRoom {
 								{
 									EntityPawnCommander pawn = new EntityPawnCommander(world);
 									pawn.setPosition(startPos.getX() + z, startPos.getY() + y,startPos.getZ() - x);
-									world.spawnEntityInWorld(pawn);
+									world.spawnEntity(pawn);
 								}else
 								{
 									EntityWhitePawns pawn = new EntityWhitePawns(world);
 									pawn.setPosition(startPos.getX() + z, startPos.getY() + y,startPos.getZ() - x);
-									world.spawnEntityInWorld(pawn);
+									world.spawnEntity(pawn);
 								}
 							}
 						}	
@@ -274,12 +273,12 @@ public class DungeonRoom {
 								{
 									EntityPawnCommander pawn = new EntityPawnCommander(world);
 									pawn.setPosition(startPos.getX() - z, startPos.getY() + y,startPos.getZ() + x);
-									world.spawnEntityInWorld(pawn);
+									world.spawnEntity(pawn);
 								}else
 								{
 									EntityWhitePawns pawn = new EntityWhitePawns(world);
 									pawn.setPosition(startPos.getX() - z, startPos.getY() + y,startPos.getZ() + x);
-									world.spawnEntityInWorld(pawn);
+									world.spawnEntity(pawn);
 								}
 							}
 						}

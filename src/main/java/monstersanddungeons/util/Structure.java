@@ -7,7 +7,6 @@ import java.util.List;
 import monstersanddungeons.blocks.MaDBlocksHandler;
 import monstersanddungeons.client.ClientProxy;
 import monstersanddungeons.util.dungeon.DungeonNBTTag;
-import monstersanddungeons.util.dungeon.DungeonRoom;
 import monstersanddungeons.util.dungeon.EnumDirection;
 import monstersanddungeons.util.dungeon.ExitData;
 import net.minecraft.block.Block;

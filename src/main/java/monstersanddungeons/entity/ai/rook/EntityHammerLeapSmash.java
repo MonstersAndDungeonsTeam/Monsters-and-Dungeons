@@ -61,7 +61,7 @@ public class EntityHammerLeapSmash extends EntitySpecialAttackBase<ModelAutomato
 			attack_player = world.getClosestPlayerToEntity(bossEntity, 50);
 			if(attack_player != null)
 			{
-				if(attack_player.getDistanceSqToEntity(bossEntity) > 20)
+				if(attack_player.getDistanceSq(bossEntity) > 20)
 				{
 					return true;
 				}

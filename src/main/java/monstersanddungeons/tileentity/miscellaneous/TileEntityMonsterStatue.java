@@ -52,7 +52,7 @@ public class TileEntityMonsterStatue extends TileEntity implements ITickable {
 
 	public boolean isPlayerNearby()
 	{
-		List<EntityPlayer> entities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPos().getX() - 25, this.getPos().getY() - 25, this.getPos().getZ() - 25, this.getPos().getX() + 25, this.getPos().getY() + 25, this.getPos().getZ() + 25));
+		List<EntityPlayer> entities = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(this.getPos().getX() - 25, this.getPos().getY() - 25, this.getPos().getZ() - 25, this.getPos().getX() + 25, this.getPos().getY() + 25, this.getPos().getZ() + 25));
 
 		if (entities.isEmpty())
 		{
@@ -82,44 +82,44 @@ public class TileEntityMonsterStatue extends TileEntity implements ITickable {
 					switch(EntityID)
 					{
 					case 0:
-						entityToSpawn = new EntityAutomatonsRook(this.worldObj);
+						entityToSpawn = new EntityAutomatonsRook(this.world);
 						break;
 					case 1:
-						entityToSpawn = new EntityWhitePawns(this.worldObj);
+						entityToSpawn = new EntityWhitePawns(this.world);
 						break;
 					case 2:
-						entityToSpawn = new EntityAutomatonsRookBoss(this.worldObj);
+						entityToSpawn = new EntityAutomatonsRookBoss(this.world);
 						break;
 					case 3:
-						entityToSpawn = new EntityFlyingSword(this.worldObj);
+						entityToSpawn = new EntityFlyingSword(this.world);
 						break;
 					case 4:
-						entityToSpawn = new EntityPawnCommander(this.worldObj);
+						entityToSpawn = new EntityPawnCommander(this.world);
 						break;
 					case 5:
-						entityToSpawn = new EntityMarshDweller(this.worldObj);
+						entityToSpawn = new EntityMarshDweller(this.world);
 						break;
 					case 6:
-						entityToSpawn = new EntityMarshDwellerFisherman(this.worldObj);
+						entityToSpawn = new EntityMarshDwellerFisherman(this.world);
 						break;
 					case 7:
-						entityToSpawn = new EntityMarshDwellerShaman(this.worldObj);
+						entityToSpawn = new EntityMarshDwellerShaman(this.world);
 						break;
 					case 8:
-						entityToSpawn = new EntityEnt(this.worldObj);
+						entityToSpawn = new EntityEnt(this.world);
 						break;
 					}
 					entityToSpawn.setPosition(this.getPos().getX(), this.getPos().getY(), this.getPos().getZ());
 					if(spawnOnce)
 					{
-						if(!this.worldObj.isRemote)
-							this.worldObj.spawnEntityInWorld(entityToSpawn);
+						if(!this.world.isRemote)
+							this.world.spawnEntity(entityToSpawn);
 
 						this.spawnOnce = false;
 					}
 
-					this.worldObj.setBlockToAir(this.getPos());
-					this.worldObj.removeTileEntity(this.getPos());
+					this.world.setBlockToAir(this.getPos());
+					this.world.removeTileEntity(this.getPos());
 				}
 			}
 		}else

@@ -163,7 +163,7 @@ public class EntityAutomatonsRook extends MaDEntityMonsterBase {
 		//slam
 		if(attackNumber == 0)
 		{
-			List<Entity> entities = worldObj.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(this.getPosition().getX() - 5, this.getPosition().getY() - 5, this.getPosition().getZ() - 5, this.getPosition().getX() + 5, this.getPosition().getY() + 5, this.getPosition().getZ() + 5));
+			List<Entity> entities = world.getEntitiesWithinAABBExcludingEntity(this, new AxisAlignedBB(this.getPosition().getX() - 5, this.getPosition().getY() - 5, this.getPosition().getZ() - 5, this.getPosition().getX() + 5, this.getPosition().getY() + 5, this.getPosition().getZ() + 5));
 
 			for(Entity entity : entities)
 			{
@@ -177,7 +177,7 @@ public class EntityAutomatonsRook extends MaDEntityMonsterBase {
 		{
 			if(this.getAttackTarget() != null)
 			{
-				if(this.getAttackTarget().getDistanceToEntity(this) <= 3)
+				if(this.getAttackTarget().getDistanceSq(this) <= 3)
 				{
 					this.attackEntityAsMob(this.getAttackTarget());
 				}
@@ -186,7 +186,7 @@ public class EntityAutomatonsRook extends MaDEntityMonsterBase {
 		{
 			if(this.getAttackTarget() != null)
 			{
-				if(this.getAttackTarget().getDistanceToEntity(this) <= 3)
+				if(this.getAttackTarget().getDistanceSq(this) <= 3)
 				{
 					this.getAttackTarget().knockBack(this, (float)7, (double)MathHelper.sin(this.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(this.rotationYaw * 0.017453292F)));
 					this.attackEntityAsMob(this.getAttackTarget());
@@ -207,7 +207,7 @@ public class EntityAutomatonsRook extends MaDEntityMonsterBase {
 	 */
 	public void startAnimation(int animation)
 	{
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 		{	
 			MaDPacketHandler.INSTANCE.sendToAll(new UpdateClientEntityAnimation(this, animation, 0));
 		}
@@ -226,7 +226,7 @@ public class EntityAutomatonsRook extends MaDEntityMonsterBase {
 
 					if(animationCycle >= 14 && animationCycle <= 17)
 					{
-						this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, 3, false);
+						this.world.createExplosion(this, this.posX, this.posY, this.posZ, 3, false);
 						this.activateAttack(0);
 					}
 				}

@@ -7,14 +7,14 @@ import monstersanddungeons.entity.ai.EntitySpecialAttackBase;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
 import monstersanddungeons.util.Reference;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -49,7 +49,7 @@ public class EntitySwordCrossSlash extends EntitySpecialAttackBase<ModelAutomato
 			attack_player = world.getClosestPlayerToEntity(bossEntity, 50);
 			if(attack_player != null)
 			{
-				if(attack_player.getDistanceSqToEntity(bossEntity) < 50)
+				if(attack_player.getDistanceSq(bossEntity) < 50)
 				{
 					if(bossEntity.getNavigator().tryMoveToEntityLiving(attack_player, 1f))
 					{
@@ -74,7 +74,7 @@ public class EntitySwordCrossSlash extends EntitySpecialAttackBase<ModelAutomato
 				GlStateManager.scale(1f, 2f, 1f);
 				Minecraft.getMinecraft().getTextureManager().bindTexture(this.location);
 				Tessellator tessellator = Tessellator.getInstance();
-				VertexBuffer vertexbuffer = tessellator.getBuffer();
+				BufferBuilder vertexbuffer = tessellator.getBuffer();
 
 				vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL);
 

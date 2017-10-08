@@ -1,7 +1,6 @@
 package monstersanddungeons.entity.ai.pawn;
 
 import java.util.List;
-import java.util.Random;
 
 import monstersanddungeons.entity.automatons.EntityPawnCommander;
 import monstersanddungeons.entity.automatons.EntityWhitePawns;
@@ -26,7 +25,7 @@ public class EntityAILeaderStackMembers extends EntityAIBase
 	{
 		if(this.pawn.isPartyLeader)
 		{
-			List<EntityWhitePawns> nearby_pawn = pawn.worldObj.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(pawn.getPosition().getX() - 15, pawn.getPosition().getY() - 15, pawn.getPosition().getZ() - 15, pawn.getPosition().getX() + 15, pawn.getPosition().getY() + 15, pawn.getPosition().getZ() + 15));
+			List<EntityWhitePawns> nearby_pawn = pawn.world.getEntitiesWithinAABB(EntityWhitePawns.class, new AxisAlignedBB(pawn.getPosition().getX() - 15, pawn.getPosition().getY() - 15, pawn.getPosition().getZ() - 15, pawn.getPosition().getX() + 15, pawn.getPosition().getY() + 15, pawn.getPosition().getZ() + 15));
 
 			if(nearby_pawn.size() > 2)
 			{
@@ -54,7 +53,7 @@ public class EntityAILeaderStackMembers extends EntityAIBase
 						if(!nearby_pawns.get(j).equals(new_top))
 						{
 							EntityWhitePawns new_bottom = nearby_pawns.get(j);
-							int currentChain = this.getChainSize(new_bottom);
+							int currentChain = EntityAILeaderStackMembers.getChainSize(new_bottom);
 							
 							if(new_bottom.hasTop == null && currentChain < 2)
 							{

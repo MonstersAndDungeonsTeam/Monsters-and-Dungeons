@@ -1,6 +1,5 @@
 package monstersanddungeons.client.models;
 
-import monstersanddungeons.entity.MaDEntityMonsterBase;
 import monstersanddungeons.entity.marshdwellers.EntityMarshDweller;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

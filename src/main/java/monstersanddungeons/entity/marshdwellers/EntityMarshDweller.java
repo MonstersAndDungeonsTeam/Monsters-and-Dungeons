@@ -8,7 +8,6 @@ import monstersanddungeons.MonstersAndDungeons;
 import monstersanddungeons.entity.MaDEntityMonsterBase;
 import monstersanddungeons.entity.ai.marshDweller.EntityAISitDown;
 import monstersanddungeons.items.MaDItemsHandler;
-import monstersanddungeons.tileentity.MaDTileEntityHandler;
 import monstersanddungeons.util.entity.IMaDShopKeeper;
 import monstersanddungeons.util.entity.ShopItem;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -31,7 +30,7 @@ import net.minecraft.world.World;
 public class EntityMarshDweller extends MaDEntityMonsterBase implements IMaDShopKeeper
 {
 
-	private static final DataParameter<Boolean> playerNearby = EntityDataManager.<Boolean>createKey(EntityMarshDweller.class, DataSerializers.BOOLEAN);
+	private final DataParameter<Boolean> playerNearby = EntityDataManager.<Boolean>createKey(EntityMarshDweller.class, DataSerializers.BOOLEAN);
 	EntityAIWander wander = new EntityAIWander(this, 0.5D);
 
 	int sitting_cd, currentShopTime;
@@ -53,7 +52,7 @@ public class EntityMarshDweller extends MaDEntityMonsterBase implements IMaDShop
 		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.getDataManager().register(playerNearby, Boolean.valueOf(isSittingDown));
 		
-		if(!worldObj.isRemote)
+		if(!world.isRemote)
 			this.fillShopItems();	
 	}
 
@@ -62,7 +61,7 @@ public class EntityMarshDweller extends MaDEntityMonsterBase implements IMaDShop
 	{	
 		if(hand.equals(EnumHand.MAIN_HAND))
 		{
-			player.openGui(MonstersAndDungeons.instance, 0, worldObj, this.getEntityId(), (int)posY, (int)posZ);
+			player.openGui(MonstersAndDungeons.instance, 0, world, this.getEntityId(), (int)posY, (int)posZ);
 		}
 		return super.processInteract(player, hand, stack);
 	}

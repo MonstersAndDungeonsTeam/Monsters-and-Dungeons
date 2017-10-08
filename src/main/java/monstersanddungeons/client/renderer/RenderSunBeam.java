@@ -2,14 +2,12 @@ package monstersanddungeons.client.renderer;
 
 import monstersanddungeons.entity.miscellaneous.EntitySunBeam;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 public class RenderSunBeam extends Render<EntitySunBeam>{
@@ -28,16 +26,16 @@ public class RenderSunBeam extends Render<EntitySunBeam>{
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, z);
 		
-		Vec3d vec = Minecraft.getMinecraft().thePlayer.getLookVec();
-		BlockPos pos = Minecraft.getMinecraft().thePlayer.getPosition();
+		Vec3d vec = Minecraft.getMinecraft().player.getLookVec();
+		//BlockPos pos = Minecraft.getMinecraft().player.getPosition();
 		
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
+		BufferBuilder vertexbuffer = tessellator.getBuffer();
 
 		vertexbuffer.begin(1, DefaultVertexFormats.POSITION_NORMAL);
 		
-		vertexbuffer.pos(vec.xCoord, vec.yCoord, vec.zCoord ).normal(0, 1, 0).endVertex();;
-		vertexbuffer.pos(vec.xCoord *3, vec.yCoord, vec.zCoord * 3).normal(0, 1, 0).endVertex();
+		vertexbuffer.pos(vec.x, vec.y, vec.z ).normal(0, 1, 0).endVertex();;
+		vertexbuffer.pos(vec.x *3, vec.y, vec.z * 3).normal(0, 1, 0).endVertex();
 		
 		tessellator.draw();
 		//drawRectangle(vec.xCoord, 0.5f, vec.zCoord, 0, 0, 0, 255f,  255f, 255f, 1f);	
@@ -85,7 +83,7 @@ public class RenderSunBeam extends Render<EntitySunBeam>{
 		GlStateManager.color(colourX, colourY, colourZ, alpha);
 
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
+		BufferBuilder vertexbuffer = tessellator.getBuffer();
 
 		vertexbuffer.begin(7, DefaultVertexFormats.POSITION_NORMAL);
 

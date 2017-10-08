@@ -36,7 +36,7 @@ public class EntitySlam extends EntitySpecialAttackBase<ModelAutomatonsRookBoss,
 			EntityPlayer attack_player = world.getClosestPlayerToEntity(bossEntity, 50);
 			if(attack_player != null)
 			{
-				if(attack_player.getDistanceSqToEntity(bossEntity) < 50)
+				if(attack_player.getDistanceSq(bossEntity) < 50)
 				{
 					if(bossEntity.getNavigator().tryMoveToEntityLiving(attack_player, 1f))
 					{

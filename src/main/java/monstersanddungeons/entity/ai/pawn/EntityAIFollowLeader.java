@@ -22,7 +22,7 @@ public class EntityAIFollowLeader extends EntityAIBase{
 		// TODO Auto-generated method stub
 		if(this.pawn.group_leader != null)
 		{
-			if(this.pawn.getDistanceSqToEntity(this.pawn.group_leader) > maxDistance)
+			if(this.pawn.getDistanceSq(this.pawn.group_leader) > maxDistance)
 			{
 				if(!this.pawn.group_leader.isDead)
 				{
@@ -47,10 +47,10 @@ public class EntityAIFollowLeader extends EntityAIBase{
 	}
 
 	@Override
-	public boolean continueExecuting() {
+	public boolean shouldContinueExecuting() {
 		if(this.pawn.group_leader != null)
 		{
-			if(this.pawn.getDistanceSqToEntity(this.pawn.group_leader) > 10)
+			if(this.pawn.getDistanceSq(this.pawn.group_leader) > 10)
 			{
 				if(!this.pawn.group_leader.isDead)
 				{
