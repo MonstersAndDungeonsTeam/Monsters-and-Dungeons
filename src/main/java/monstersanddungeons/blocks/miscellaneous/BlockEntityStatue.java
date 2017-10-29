@@ -12,7 +12,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlockEntityStatue extends Block implements ITileEntityProvider {
 
@@ -21,10 +20,6 @@ public class BlockEntityStatue extends Block implements ITileEntityProvider {
 
 		setUnlocalizedName(name);
 		setRegistryName(name);
-
-		GameRegistry.register(this);
-
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

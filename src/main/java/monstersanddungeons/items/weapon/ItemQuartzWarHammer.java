@@ -21,8 +21,6 @@ public class ItemQuartzWarHammer extends ItemAxe {
 
 		setUnlocalizedName(name);
 		setRegistryName(name);
-
-		GameRegistry.register(this);
 	}
 
 	/*-

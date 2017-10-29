@@ -104,7 +104,7 @@ public class DungeonAutomatons extends MaDDungeonBase{
 	public void constructDungeon(World world, BlockPos startingLocation, int DungeonSize) 
 	{
 		System.out.println("building: ");
-		boolean placeBossRoom = false;
+		//boolean placeBossRoom = false;
 		createRandomNetwork(DungeonSize);
 
 		for (int i = 0; i < getAll_exits().size(); i++) 
@@ -137,7 +137,7 @@ public class DungeonAutomatons extends MaDDungeonBase{
 						pos = pos.north(43);
 						break;
 					}
-					world.setBlockState(pos.up(5), MaDBlocksHandler.BlockEntityStatue.getDefaultState());
+					world.setBlockState(pos.up(5), MaDBlocksHandler.blockEntityStatue.getDefaultState());
 					world.setTileEntity(pos.up(5), spawner);
 					break;
 				}
@@ -196,7 +196,7 @@ public class DungeonAutomatons extends MaDDungeonBase{
 					pawn.setPosition(blockPos.getX(), blockPos.getY(), blockPos.getZ());
 					statue = new TileEntityMonsterStatue(pawn);
 				}
-				world.setBlockState(blockPos, MaDBlocksHandler.BlockEntityStatue.getDefaultState());
+				world.setBlockState(blockPos, MaDBlocksHandler.blockEntityStatue.getDefaultState());
 				world.setTileEntity(blockPos, statue);
 			}
 		}

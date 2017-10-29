@@ -2,7 +2,6 @@ package monstersanddungeons.blocks.miscellaneous;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlockMagicalSapling extends Block{
 
@@ -12,7 +11,5 @@ public class BlockMagicalSapling extends Block{
 		
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		GameRegistry.register(this);
 	}
-
 }

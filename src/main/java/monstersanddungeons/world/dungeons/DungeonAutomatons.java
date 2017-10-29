@@ -2,7 +2,6 @@ package monstersanddungeons.world.dungeons;
 
 import java.util.Random;
 
-import monstersanddungeons.entity.automatons.EntityAutomatonsRook;
 import monstersanddungeons.entity.automatons.EntityAutomatonsRookBoss;
 import monstersanddungeons.util.dungeon.Dungeon;
 import monstersanddungeons.util.dungeon.DungeonRoom;

@@ -62,7 +62,7 @@ public class Structure {
 						data.blocks[x][y][z] =  world.getBlockState(new BlockPos(placePosX, placePosY, placePosZ));
 
 
-						if(world.getBlockState(new BlockPos(placePosX, placePosY, placePosZ)).getBlock().equals(MaDBlocksHandler.BlockExit))
+						if(world.getBlockState(new BlockPos(placePosX, placePosY, placePosZ)).getBlock().equals(MaDBlocksHandler.blockExit))
 						{
 							totalExits.add(new ExitData(new BlockPos(x,y,z), EnumDirection.getDirectionFromBlockState(data.blocks[x][y][z]), false));
 							howManyExits++;

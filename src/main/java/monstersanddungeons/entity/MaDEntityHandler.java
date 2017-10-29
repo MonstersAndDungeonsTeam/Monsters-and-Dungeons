@@ -1,6 +1,7 @@
 package monstersanddungeons.entity;
 
 import java.util.Random;
+import java.util.Set;
 
 import monstersanddungeons.MonstersAndDungeons;
 import monstersanddungeons.client.models.ModelAutomatonsRook;
@@ -71,7 +72,13 @@ public class MaDEntityHandler {
 	}
 
 	public static void addSpawns() {
-		EntityRegistry.addSpawn(EntityEnt.class, 100, 1, 1, EnumCreatureType.AMBIENT, (Biome[]) BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).toArray());
+		Object[] biomeList = BiomeDictionary.getBiomes(BiomeDictionary.Type.FOREST).toArray();
+	
+		Biome[] biomeArray = new Biome[biomeList.length];
+		for(int i=0;i<biomeList.length;i++){
+			biomeArray[i] = (Biome)biomeList[i];
+		}
+		EntityRegistry.addSpawn(EntityEnt.class, 100, 1, 1, EnumCreatureType.AMBIENT, biomeArray);
 	}
 
 

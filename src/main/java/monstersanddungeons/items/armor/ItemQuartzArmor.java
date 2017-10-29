@@ -31,7 +31,7 @@ public class ItemQuartzArmor extends ItemMaDArmor {
 		public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack stack, EntityEquipmentSlot armorSlot, ModelBiped defaultModel) {
 			if (stack != null) {
 				if (stack.getItem() instanceof ItemArmor) {
-					EntityEquipmentSlot type = ((ItemArmor)stack.getItem()).armorType;
+					//EntityEquipmentSlot type = ((ItemArmor)stack.getItem()).armorType;
 					ModelBiped armorModel = MonstersAndDungeons.proxy.getArmorModel(armorType.getIndex());
 					
 					armorModel.bipedHead.showModel = armorSlot == EntityEquipmentSlot.HEAD;

@@ -14,8 +14,5 @@ public class GenBlockStairs extends BlockStairs {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlock(this), getRegistryName());
 	}
 }

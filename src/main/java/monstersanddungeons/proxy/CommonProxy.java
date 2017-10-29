@@ -8,7 +8,6 @@ import monstersanddungeons.blocks.MaDBlocksHandler;
 import monstersanddungeons.client.gui.MaDGuiHandler;
 import monstersanddungeons.entity.MaDEntityHandler;
 import monstersanddungeons.events.CommonEventHandler;
-import monstersanddungeons.items.MaDItemsHandler;
 import monstersanddungeons.packet.MaDPacketHandler;
 import monstersanddungeons.sound.MaDSoundsHandler;
 import monstersanddungeons.tileentity.MaDTileEntityHandler;
@@ -22,27 +21,19 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-
-
 public class CommonProxy {
 
-	public static File ConfigDir;
+	public static File cfgDir;
 
 	public void preInit(FMLPreInitializationEvent event) {
-		// TODO Auto-generated method stub
-
-
-		this.ConfigDir = event.getModConfigurationDirectory();
+		CommonProxy.cfgDir = event.getModConfigurationDirectory();
 
 		try {
-			MaDBlocksHandler.genBlocks(ConfigDir.getPath());
+			MaDBlocksHandler.genBlocks(cfgDir.getPath());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		MaDBlocksHandler.init();
-		MaDItemsHandler.init();
 		MaDPacketHandler.init();
 		MaDTileEntityHandler.register();
 		MaDEntityHandler.registerEntities();
@@ -52,7 +43,6 @@ public class CommonProxy {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		// TODO Auto-generated method stub
 		GameRegistry.registerWorldGenerator(new MaDWorldGenerationHandler(), 9000);
 	}
 
@@ -61,7 +51,6 @@ public class CommonProxy {
 	}
 
 	public void RegisterRenders() {
-		// TODO Auto-generated method stub
 
 	}
 

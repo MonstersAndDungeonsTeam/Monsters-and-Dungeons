@@ -9,13 +9,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 
@@ -28,8 +26,6 @@ public class ItemSpawnEgg extends Item
 		setRegistryName(name);
 
 		this.setHasSubtypes(true);
-
-		GameRegistry.register(this);
 	}
 
 	@Override

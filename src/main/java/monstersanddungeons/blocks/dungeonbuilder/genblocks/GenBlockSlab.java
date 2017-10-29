@@ -7,7 +7,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class GenBlockSlab extends BlockSlab{
 	
@@ -19,8 +18,6 @@ public class GenBlockSlab extends BlockSlab{
 		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		this.setRegistryName(name);
 		this.useNeighborBrightness = true;
-		
-		GameRegistry.register(this);
 	}
 
 	@Override

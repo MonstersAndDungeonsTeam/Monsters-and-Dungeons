@@ -141,7 +141,7 @@ public class VillageFrog extends MaDDungeonBase{
 					EntityMarshDwellerShaman pawn = new EntityMarshDwellerShaman(world);
 					pawn.setPosition(blockPos.getX(), blockPos.getY(), blockPos.getZ());
 					statue = new TileEntityMonsterStatue(pawn);
-					world.setBlockState(blockPos, MaDBlocksHandler.BlockEntityStatue.getDefaultState());
+					world.setBlockState(blockPos, MaDBlocksHandler.blockEntityStatue.getDefaultState());
 					world.setTileEntity(blockPos, statue);
 				}else
 					if(arena.getBlock() instanceof BlockNote)
@@ -161,7 +161,7 @@ public class VillageFrog extends MaDDungeonBase{
 								pawn.setPosition(blockPos.getX(), blockPos.getY(), blockPos.getZ());
 								statue = new TileEntityMonsterStatue(pawn);
 							}
-							world.setBlockState(blockPos, MaDBlocksHandler.BlockEntityStatue.getDefaultState());
+							world.setBlockState(blockPos, MaDBlocksHandler.blockEntityStatue.getDefaultState());
 							world.setTileEntity(blockPos, statue);
 						}
 					}

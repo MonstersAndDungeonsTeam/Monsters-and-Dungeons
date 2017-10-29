@@ -44,7 +44,7 @@ public abstract class MaDEntityMonsterBase extends EntityMob
 				{
 					TileEntityMonsterStatue statue = new TileEntityMonsterStatue(this);
 	
-					world.setBlockState(this.getPosition().up(), MaDBlocksHandler.BlockEntityStatue.getDefaultState());
+					world.setBlockState(this.getPosition().up(), MaDBlocksHandler.blockEntityStatue.getDefaultState());
 					world.setTileEntity(this.getPosition().up(), statue);
 	
 					this.setDead();

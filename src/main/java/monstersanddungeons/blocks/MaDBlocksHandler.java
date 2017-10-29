@@ -29,117 +29,110 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-
-
+@Mod.EventBusSubscriber
 public class MaDBlocksHandler {
 
-	public static Block BlockExit, BlockRotten, BlockStonePagoda, BlockEntityStatue;
+	public static Block blockExit, blockRotten, blockStonePagoda, blockEntityStatue;
 	public static List<Block> genBlocks = new ArrayList<Block>();
 	public static List<ItemGenBlockSlab> genSlab = new ArrayList<ItemGenBlockSlab>();
 
 
-	public static void init()
-	{
-
-		BlockExit = new BlockExit("BlockExit");		
-		BlockRotten = new BlockRotten("BlockRotten");
-		BlockEntityStatue = new BlockEntityStatue("BlockEntityStatue");
-
-		BlockStonePagoda = new BlockStonePagoda("Stone Pagoda");
+	@SubscribeEvent
+	public static void registerBlocks(RegistryEvent.Register<Block> event) {
+		blockExit = new BlockExit("BlockExit");
+		blockRotten = new BlockRotten("BlockRotten");
+		blockEntityStatue = new BlockEntityStatue("BlockEntityStatue");
+		blockStonePagoda = new BlockStonePagoda("Stone Pagoda");
+		
+		event.getRegistry().register(blockExit);
+		event.getRegistry().register(blockRotten);
+		event.getRegistry().register(blockEntityStatue);
+		event.getRegistry().register(blockStonePagoda);
 	}
 
-	public static void registerRenders()
-	{
-		registerRender(BlockExit);
-		registerRender(BlockRotten);
-		registerRender(BlockStonePagoda);
-		registerRender(BlockEntityStatue);
+	public static void registerRenders() {
+		registerRender(blockExit);
+		registerRender(blockRotten);
+		registerRender(blockStonePagoda);
+		registerRender(blockEntityStatue);
 
-		for(int i  = 0; i < genBlocks.size() ; i ++)
-		{
-			registerRender(genBlocks.get(i));	
+		for (int i = 0; i < genBlocks.size(); i++) {
+			registerRender(genBlocks.get(i));
 		}
+		
+		//Exit, Rotten, Pagoda - GameRegistry.register(new ItemBlock(this), getRegistryName());
+
 	}
 
-	public static void registerRender(Block block)
-	{
+	public static void registerRender(Block block) {
 		Item item = Item.getItemFromBlock(block);
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(Reference.MODID +":" + block.getUnlocalizedName().substring(5),"inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(
+				Reference.MODID + ":" + block.getUnlocalizedName().substring(5), "inventory"));
 
 	}
 
-	public static void genBlocks(String Directory) throws IOException 
-	{
-		File OldZipFile = new File(Directory + "/" + Reference.NAME +"/madresources.zip");
+	public static void genBlocks(String Directory) throws IOException {
+		File OldZipFile = new File(Directory + "/" + Reference.NAME + "/madresources.zip");
 
-		if(!OldZipFile.exists())
-		{
+		if (!OldZipFile.exists()) {
 			OldZipFile.mkdirs();
 			return;
 		}
 
-
 		ZipFile zipDirectory;
-		try
-		{
-			zipDirectory= new ZipFile(OldZipFile);
-		}catch(FileNotFoundException e){
+		try {
+			zipDirectory = new ZipFile(OldZipFile);
+		} catch (FileNotFoundException e) {
 			return;
 		}
 
+		List<ZipEntry> missingBlockState = new ArrayList<ZipEntry>();
+		List<ZipEntry> missingModels = new ArrayList<ZipEntry>();
 
-		List<ZipEntry> missingBlockState = new ArrayList<ZipEntry>(); 
-		List<ZipEntry> missingModels = new ArrayList<ZipEntry>(); 
+		Enumeration<? extends ZipEntry> enumeration = zipDirectory.entries();
 
-		Enumeration <? extends ZipEntry > enumeration = zipDirectory.entries();
+		while (enumeration.hasMoreElements()) {
+			ZipEntry entry = (ZipEntry) enumeration.nextElement();
 
-		while (enumeration.hasMoreElements()) 
-		{
-			ZipEntry entry = (ZipEntry)enumeration.nextElement();
+			if (entry != null) {
+				if (entry.getName().contains("/textures")) {
+					if (entry.getName().endsWith(".png")) {
 
-			if(entry != null)
-			{
-				if(entry.getName().contains("/textures"))
-				{
-					if(entry.getName().endsWith(".png"))
-					{
+						String name = entry.getName().substring(36, entry.getName().length() - 4);
 
-						String name = entry.getName().substring(36, entry.getName().length()- 4);
-
-						if(name.contains("_stairs"))
-						{
+						if (name.contains("_stairs")) {
 							Block block = new Block(Material.ROCK);
 							BlockStairs block_stairs = new GenBlockStairs(block.getDefaultState(), name);
 
 							genBlocks.add(block_stairs);
 
-						}else if(name.contains("_slab"))
-						{
+						} else if (name.contains("_slab")) {
 							Block block = new GenBlockSlab(name, Material.CLOTH);
 							Block Doubleblock = new GenBlockDoubleSlab(Material.CLOTH, "double_" + name);
 
 							genBlocks.add(block);
 							genBlocks.add(Doubleblock);
 
-							ItemGenBlockSlab slab = (ItemGenBlockSlab) (new ItemGenBlockSlab((GenBlockSlab)block, (GenBlockSlab)block, (GenBlockSlab)Doubleblock, "item_" + name));
+							ItemGenBlockSlab slab = (ItemGenBlockSlab) (new ItemGenBlockSlab((GenBlockSlab) block,
+									(GenBlockSlab) block, (GenBlockSlab) Doubleblock, "item_" + name));
 							genSlab.add(slab);
 
-						}else 
-						{
+						} else {
 							Block block = new GenBlocks(name);
 							genBlocks.add(block);
 						}
 
 						boolean[] hasResources = hasModel(name, zipDirectory);
 
-						if(!hasResources[0])
-						{
+						if (!hasResources[0]) {
 							missingBlockState.add(entry);
 						}
 
-						if(!hasResources[1])
-						{
+						if (!hasResources[1]) {
 							missingModels.add(entry);
 						}
 					}
@@ -147,37 +140,29 @@ public class MaDBlocksHandler {
 			}
 		}
 
-		if(!missingBlockState.isEmpty() || !missingModels.isEmpty())
-		{
+		if (!missingBlockState.isEmpty() || !missingModels.isEmpty()) {
 			generateResources(OldZipFile, missingBlockState, missingModels);
 		}
 
 		zipDirectory.close();
 	}
 
-	private static boolean[] hasModel(String name, ZipFile file)
-	{
+	private static boolean[] hasModel(String name, ZipFile file) {
 		boolean[] missingResources = new boolean[2];
 
 		Enumeration<? extends ZipEntry> enumeration = file.entries();
 
-		while (enumeration.hasMoreElements()) 
-		{
-			ZipEntry entry = (ZipEntry)enumeration.nextElement();
+		while (enumeration.hasMoreElements()) {
+			ZipEntry entry = (ZipEntry) enumeration.nextElement();
 
-			if(entry != null)
-			{
-				if(entry.getName().contains(name))
-				{
-					if(entry.getName().contains("/blockstates/"))
-					{
+			if (entry != null) {
+				if (entry.getName().contains(name)) {
+					if (entry.getName().contains("/blockstates/")) {
 						missingResources[0] = true;
 
-					}else
-						if(entry.getName().contains("/models/"))
-						{
-							missingResources[1] = true;
-						}
+					} else if (entry.getName().contains("/models/")) {
+						missingResources[1] = true;
+					}
 				}
 			}
 		}
@@ -185,8 +170,8 @@ public class MaDBlocksHandler {
 		return missingResources;
 	}
 
-	private static boolean generateResources(File oldZipfile, List<ZipEntry> blockstateList, List<ZipEntry> modelList) throws IOException
-	{
+	private static boolean generateResources(File oldZipfile, List<ZipEntry> blockstateList, List<ZipEntry> modelList)
+			throws IOException {
 
 		File tempFile = new File(oldZipfile.getParent() + "/madresources_old.zip");
 		tempFile.createNewFile();
@@ -214,40 +199,41 @@ public class MaDBlocksHandler {
 		ZipInputStream tempIn = new ZipInputStream(new FileInputStream(tempFile));
 		ZipOutputStream out = new ZipOutputStream(new FileOutputStream(oldZipfile));
 
-		for(ZipEntry entry : blockstateList)
-		{
+		for (ZipEntry entry : blockstateList) {
 			StringBuilder sb = new StringBuilder();
-			String name = entry.getName().substring(36, entry.getName().length()- 4);
+			String name = entry.getName().substring(36, entry.getName().length() - 4);
 
 			ZipEntry newEntry = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/blockstates/" + name + ".json");
 			out.putNextEntry(newEntry);
 
-			if(name.contains("_stairs"))
-			{
+			if (name.contains("_stairs")) {
 				String blockstatejsonFile = Reference.genBlock_Stairs_Blockstate;
 
-				blockstatejsonFile = blockstatejsonFile.replace("oak_stairs", Reference.MOD_ID_GenBlocks + ":" +name);
-				blockstatejsonFile = blockstatejsonFile.replace("oak_outer_stairs", Reference.MOD_ID_GenBlocks + ":" +name + "_outer");
-				blockstatejsonFile = blockstatejsonFile.replace("oak_inner_stairs", Reference.MOD_ID_GenBlocks + ":" +name + "_inner");
+				blockstatejsonFile = blockstatejsonFile.replace("oak_stairs", Reference.MOD_ID_GenBlocks + ":" + name);
+				blockstatejsonFile = blockstatejsonFile.replace("oak_outer_stairs",
+						Reference.MOD_ID_GenBlocks + ":" + name + "_outer");
+				blockstatejsonFile = blockstatejsonFile.replace("oak_inner_stairs",
+						Reference.MOD_ID_GenBlocks + ":" + name + "_inner");
 
 				sb.append(blockstatejsonFile);
 
 				byte[] data = sb.toString().getBytes();
 				out.write(data, 0, data.length);
 
-			}else if(name.contains("_slab"))
-			{
+			} else if (name.contains("_slab")) {
 				String blockstatejsonFile = Reference.genBlocks_Slab_blockstate;
 
-				blockstatejsonFile = blockstatejsonFile.replace("half_slab_oak", Reference.MOD_ID_GenBlocks + ":" + name + "_half");
-				blockstatejsonFile = blockstatejsonFile.replace("upper_slab_oak", Reference.MOD_ID_GenBlocks + ":" + name + "_upper");
+				blockstatejsonFile = blockstatejsonFile.replace("half_slab_oak",
+						Reference.MOD_ID_GenBlocks + ":" + name + "_half");
+				blockstatejsonFile = blockstatejsonFile.replace("upper_slab_oak",
+						Reference.MOD_ID_GenBlocks + ":" + name + "_upper");
 
 				sb.append(blockstatejsonFile);
 
 				byte[] data = sb.toString().getBytes();
 				out.write(data, 0, data.length);
 
-			}else {
+			} else {
 
 				String blockstatejsonFile = Reference.genBlocks_Block_blockstate;
 
@@ -261,12 +247,10 @@ public class MaDBlocksHandler {
 			}
 		}
 
-		for(ZipEntry entry : modelList)
-		{
-			String name = entry.getName().substring(36, entry.getName().length()- 4);
+		for (ZipEntry entry : modelList) {
+			String name = entry.getName().substring(36, entry.getName().length() - 4);
 
-			if(name.contains("_stairs"))
-			{
+			if (name.contains("_stairs")) {
 				String stairreg = Reference.genBlocks_Stairs_model_reg;
 				String stairInner = Reference.genBlocks_Stairs_model_inner;
 				String stairOuter = Reference.genBlocks_Stairs_model_outer;
@@ -275,10 +259,14 @@ public class MaDBlocksHandler {
 				StringBuilder sb2 = new StringBuilder();
 				StringBuilder sb3 = new StringBuilder();
 
-				ZipEntry newEntry1 = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + ".json");
-				ZipEntry newEntryInner = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + "_inner" + ".json");
-				ZipEntry newEntryOuter = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + "_outer" +".json");
-				ZipEntry newItemEntry = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/item/" + name + ".json");
+				ZipEntry newEntry1 = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + ".json");
+				ZipEntry newEntryInner = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + "_inner" + ".json");
+				ZipEntry newEntryOuter = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + "_outer" + ".json");
+				ZipEntry newItemEntry = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/item/" + name + ".json");
 
 				stairreg = stairreg.replace("blocks/planks_oak", Reference.MOD_ID_GenBlocks + ":" + name);
 				sb1.append(stairreg);
@@ -305,20 +293,19 @@ public class MaDBlocksHandler {
 				out.putNextEntry(newItemEntry);
 				out.write(data1, 0, data1.length);
 
-			}else if(name.contains("_slab"))
-			{
+			} else if (name.contains("_slab")) {
 				String slabHalf = Reference.genBlocks_Slab_model_half;
 				String slabUpper = Reference.genBlocks_Slab_model_upper;
-
 
 				StringBuilder sb1 = new StringBuilder();
 				StringBuilder sb2 = new StringBuilder();
 
-
-
-				ZipEntry newEntryHalf = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + "_half" + ".json");
-				ZipEntry newEntryUpper = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + "_upper" +".json");
-				ZipEntry newItemEntry = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/item/"  + "item_" + name + ".json");
+				ZipEntry newEntryHalf = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + "_half" + ".json");
+				ZipEntry newEntryUpper = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + "_upper" + ".json");
+				ZipEntry newItemEntry = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/item/" + "item_" + name + ".json");
 
 				slabHalf = slabHalf.replace("blocks/planks_oak", Reference.MOD_ID_GenBlocks + ":" + name);
 				sb1.append(slabHalf);
@@ -338,15 +325,15 @@ public class MaDBlocksHandler {
 				out.putNextEntry(newItemEntry);
 				out.write(data1, 0, data1.length);
 
-			}else 
-			{
+			} else {
 				String blockModel = Reference.genBlocks_Block_model;
-
 
 				StringBuilder sb1 = new StringBuilder();
 
-				ZipEntry newEntryHalf = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + ".json");
-				ZipEntry newItemEntry = new ZipEntry("assets/" + Reference.MOD_ID_GenBlocks + "/models/item/" + name + ".json");
+				ZipEntry newEntryHalf = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/block/" + name + ".json");
+				ZipEntry newItemEntry = new ZipEntry(
+						"assets/" + Reference.MOD_ID_GenBlocks + "/models/item/" + name + ".json");
 
 				blockModel = blockModel.replace("blocks/dirt", Reference.MOD_ID_GenBlocks + ":" + name);
 				sb1.append(blockModel);
@@ -380,7 +367,5 @@ public class MaDBlocksHandler {
 
 		return true;
 	}
-
-
 
 }

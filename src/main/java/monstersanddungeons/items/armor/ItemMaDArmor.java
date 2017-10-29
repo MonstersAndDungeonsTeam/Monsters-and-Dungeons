@@ -5,13 +5,11 @@ import java.util.List;
 import monstersanddungeons.util.Reference;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMaDArmor extends ItemArmor {
 	protected String unlocalizedName;
@@ -21,8 +19,6 @@ public class ItemMaDArmor extends ItemArmor {
 		
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		
-		GameRegistry.register(this);
 	}
 
 	@Override
