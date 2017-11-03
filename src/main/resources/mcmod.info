@@ -2,13 +2,13 @@
 {
   "modid": "monstersanddungeons",
   "name": "Monsters and Dungeons",
-  "description": "Brings more adventures to your minecraft worlds.",
+  "description": "Venture to the far ends of the world. From the misty mountains to the stormy deserts. A quest for loot and glory.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://minecraft.curseforge.com/projects/monsters-and-dungeons",
   "updateUrl": "",
-  "authorList": ["Ruukas"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Ruukas", "Bryuf"],
+  "credits": "All former developers, who can be seen on the CurseForge page.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
