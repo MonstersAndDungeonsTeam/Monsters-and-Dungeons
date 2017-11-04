@@ -5,7 +5,6 @@ import java.util.HashSet;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -20,7 +19,7 @@ public class AllBlocks {
     public static Block HELMET;
         
     public static void initBlocks(){
-		HELMET = new BlockHelmet().setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setUnlocalizedName("blockHelmet").setRegistryName("helmet");
+		HELMET = new BlockHelmet().setUnlocalizedName("blockHelmet").setRegistryName("helmet");
     
 		addBlocks(HELMET);
     }

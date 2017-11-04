@@ -7,10 +7,10 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraftforge.common.util.Constants.NBT;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import ruukas.monstersanddungeons.item.AllItems;
 import ruukas.monstersanddungeons.item.ItemArmorWasp;
 
-public class TileHelmet extends TileEntity implements ITickable
+public class TileHelmet extends TileEntity
 {
     private int helmetRotation;
     private ItemStack helmet = new ItemStack(AllItems.WASP_HEAD);
@@ -50,6 +50,12 @@ public class TileHelmet extends TileEntity implements ITickable
         }
     }
     
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+    	readFromNBT(pkt.getNbtCompound());
+    	System.out.println(pkt.getNbtCompound().toString());
+    }
+    
     public boolean setItemStack(ItemStack itemstack){
     	Item item = itemstack.getItem();
     	
@@ -62,11 +68,6 @@ public class TileHelmet extends TileEntity implements ITickable
     
     public ItemStack getItemStack(){
     	return this.helmet;
-    }
-
-    public void update()
-    {
-        //Perhaps some of the helmets need animation?
     }
 
     @Nullable
@@ -90,6 +91,14 @@ public class TileHelmet extends TileEntity implements ITickable
     public void setHelmetRotation(int rotation)
     {
         this.helmetRotation = rotation;
+        System.out.println("Rotation: " + rotation);
+    }
+    
+    @Override
+    public boolean receiveClientEvent(int id, int type)
+    {
+    	System.out.println("Id: " + id);
+		return super.receiveClientEvent(id, type);
     }
 
     public void mirror(Mirror mirrorIn)

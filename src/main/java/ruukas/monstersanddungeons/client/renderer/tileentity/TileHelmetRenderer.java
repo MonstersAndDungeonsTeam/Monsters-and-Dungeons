@@ -1,24 +1,11 @@
 package ruukas.monstersanddungeons.client.renderer.tileentity;
 
-import java.util.Map;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -92,7 +79,7 @@ public class TileHelmetRenderer extends TileEntitySpecialRenderer<TileHelmet>
                     rotationIn = 90.0F;
             }
         }
-
+        
         GlStateManager.enableRescaleNormal();
         GlStateManager.scale(-1.0F, -1.0F, 1.0F);
         GlStateManager.enableAlpha();
