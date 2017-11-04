@@ -3,6 +3,8 @@ package ruukas.monstersanddungeons.tileentity;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.BlockSkull;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -14,22 +16,24 @@ import net.minecraft.util.Rotation;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import ruukas.monstersanddungeons.item.AllItems;
+import ruukas.monstersanddungeons.item.ItemArmorWasp;
 
 public class TileHelmet extends TileEntity implements ITickable
 {
-    private int skullRotation;
-    private ItemStack helmet;
+    private int helmetRotation;
+    private ItemStack helmet = new ItemStack(AllItems.WASP_HEAD);
 
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
-        compound.setByte("Rot", (byte)(this.skullRotation & 255));
+        compound.setByte("Rot", (byte)(this.helmetRotation & 255));
 
         if (this.helmet != null)
         {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             helmet.writeToNBT(nbttagcompound);
-            compound.setTag("Owner", nbttagcompound);
+            compound.setTag("Helmet", nbttagcompound);
         }
 
         return compound;
@@ -38,12 +42,22 @@ public class TileHelmet extends TileEntity implements ITickable
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
-        this.skullRotation = compound.getByte("Rot");
+        this.helmetRotation = compound.getByte("Rot");
 
         if (compound.hasKey("Helmet", NBT.TAG_COMPOUND))
         {
             helmet = new ItemStack(compound.getCompoundTag("Helmet"));
         }
+    }
+    
+    public boolean setItemStack(ItemStack itemstack){
+    	Item item = itemstack.getItem();
+    	
+    	if(item instanceof ItemArmorWasp && ((ItemArmorWasp)item).getEquipmentSlot() == EntityEquipmentSlot.HEAD){
+    		this.helmet = itemstack.copy();
+    		return true;
+    	}
+    	return false;
     }
     
     public ItemStack getItemStack(){
@@ -68,21 +82,21 @@ public class TileHelmet extends TileEntity implements ITickable
 
 
     @SideOnly(Side.CLIENT)
-    public int getSkullRotation()
+    public int getHelmetRotation()
     {
-        return this.skullRotation;
+        return this.helmetRotation;
     }
 
-    public void setSkullRotation(int rotation)
+    public void setHelmetRotation(int rotation)
     {
-        this.skullRotation = rotation;
+        this.helmetRotation = rotation;
     }
 
     public void mirror(Mirror mirrorIn)
     {
         if (this.world != null && this.world.getBlockState(this.getPos()).getValue(BlockSkull.FACING) == EnumFacing.UP)
         {
-            this.skullRotation = mirrorIn.mirrorRotation(this.skullRotation, 16);
+            this.helmetRotation = mirrorIn.mirrorRotation(this.helmetRotation, 16);
         }
     }
 
@@ -90,7 +104,7 @@ public class TileHelmet extends TileEntity implements ITickable
     {
         if (this.world != null && this.world.getBlockState(this.getPos()).getValue(BlockSkull.FACING) == EnumFacing.UP)
         {
-            this.skullRotation = rotationIn.rotate(this.skullRotation, 16);
+            this.helmetRotation = rotationIn.rotate(this.helmetRotation, 16);
         }
     }
 }

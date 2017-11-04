@@ -17,6 +17,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import ruukas.monstersanddungeons.MonstersAndDungeons;
+import ruukas.monstersanddungeons.block.AllBlocks;
 
 public class AllItems {
     public static Item WASP_HEAD;
@@ -24,7 +25,7 @@ public class AllItems {
     public static Item WASP_LEGS;
     public static Item WASP_BOOTS;
     
-    public static HashSet<Item> itemSet = new HashSet<Item>();;
+    public static HashSet<Item> itemSet = new HashSet<Item>();    
         
     public static void initItems(){
 		WASP_HEAD = new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.HEAD).setUnlocalizedName("chestplateWasp").setRegistryName("wasp_helmet");
@@ -66,13 +67,11 @@ public class AllItems {
     	@SubscribeEvent
     	public static void registerItemModels(ModelRegistryEvent event){
     		for (Item item : itemSet){
-        		setModelLocationForItem(item);
+        		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
     		}
-    	}
-    	
-    	@SideOnly(Side.CLIENT)
-    	private static void setModelLocationForItem(Item item){
-    		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
+    		for (Item item : AllBlocks.itemBlockSet){
+        		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
+    		}
     	}
     }
 }

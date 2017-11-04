@@ -1,13 +1,7 @@
 package ruukas.monstersanddungeons.item;
 
 import java.util.List;
-import java.util.UUID;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.mojang.authlib.GameProfile;
-
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSkull;
 import net.minecraft.block.state.IBlockState;
@@ -17,25 +11,23 @@ import net.minecraft.client.util.ITooltipFlag.TooltipFlags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntitySkull;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ruukas.monstersanddungeons.MonstersAndDungeons;
+import ruukas.monstersanddungeons.block.AllBlocks;
 import ruukas.monstersanddungeons.client.model.ModelWaspArmor;
+import ruukas.monstersanddungeons.tileentity.TileHelmet;
 
 public class ItemArmorWasp extends ItemArmor {
 	public ItemArmorWasp(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
@@ -60,6 +52,10 @@ public class ItemArmorWasp extends ItemArmor {
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
+		
+		if(getEquipmentSlot() == EntityEquipmentSlot.HEAD){
+			tooltip.add(TextFormatting.AQUA + "You can place this.");
+		}
 		
 		if(flagIn == TooltipFlags.ADVANCED){
 			tooltip.add("Modeled by KaijuRizard for his trial.");
@@ -104,7 +100,7 @@ public class ItemArmorWasp extends ItemArmor {
 
             ItemStack itemstack = player.getHeldItem(hand);
 
-            if (player.canPlayerEdit(pos, facing, itemstack) && Blocks.SKULL.canPlaceBlockAt(worldIn, pos))
+            if (player.canPlayerEdit(pos, facing, itemstack) && AllBlocks.HELMET.canPlaceBlockAt(worldIn, pos))
             {
                 if (worldIn.isRemote)
                 {
@@ -112,7 +108,7 @@ public class ItemArmorWasp extends ItemArmor {
                 }
                 else
                 {
-                    worldIn.setBlockState(pos, Blocks.SKULL.getDefaultState().withProperty(BlockSkull.FACING, facing), 11);
+                    worldIn.setBlockState(pos, AllBlocks.HELMET.getDefaultState().withProperty(BlockSkull.FACING, facing), 11);
                     int i = 0;
 
                     if (facing == EnumFacing.UP)
@@ -122,42 +118,13 @@ public class ItemArmorWasp extends ItemArmor {
 
                     TileEntity tileentity = worldIn.getTileEntity(pos);
 
-                    if (tileentity instanceof TileEntitySkull)
+                    if (tileentity instanceof TileHelmet)
                     {
-                        TileEntitySkull tileentityskull = (TileEntitySkull)tileentity;
+                    	TileHelmet tileHelmet = (TileHelmet)tileentity;
+                    	
+                    	tileHelmet.setItemStack(itemstack);
 
-                        if (itemstack.getMetadata() == 3)
-                        {
-                            GameProfile gameprofile = null;
-
-                            if (itemstack.hasTagCompound())
-                            {
-                                NBTTagCompound nbttagcompound = itemstack.getTagCompound();
-
-                                if (nbttagcompound.hasKey("SkullOwner", 10))
-                                {
-                                    gameprofile = NBTUtil.readGameProfileFromNBT(nbttagcompound.getCompoundTag("SkullOwner"));
-                                }
-                                else if (nbttagcompound.hasKey("SkullOwner", 8) && !StringUtils.isBlank(nbttagcompound.getString("SkullOwner")))
-                                {
-                                    gameprofile = new GameProfile((UUID)null, nbttagcompound.getString("SkullOwner"));
-                                }
-                            }
-
-                            tileentityskull.setPlayerProfile(gameprofile);
-                        }
-                        else
-                        {
-                            tileentityskull.setType(itemstack.getMetadata());
-                        }
-
-                        tileentityskull.setSkullRotation(i);
-                        Blocks.SKULL.checkWitherSpawn(worldIn, pos, tileentityskull);
-                    }
-
-                    if (player instanceof EntityPlayerMP)
-                    {
-                        CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)player, pos, itemstack);
+                        tileHelmet.setHelmetRotation(i);
                     }
 
                     itemstack.shrink(1);

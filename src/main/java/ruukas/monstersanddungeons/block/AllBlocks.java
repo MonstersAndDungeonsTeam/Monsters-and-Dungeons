@@ -5,19 +5,22 @@ import java.util.HashSet;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import ruukas.monstersanddungeons.MonstersAndDungeons;
 
-public class AllBlocks {
-    public static Block HELMET;
-    
+public class AllBlocks {    
     public static HashSet<Block> blockSet = new HashSet<Block>();
+    public static HashSet<Item> itemBlockSet = new HashSet<Item>();
+    
+    public static Block HELMET;
         
     public static void initBlocks(){
-		HELMET = new BlockHelmet();
+		HELMET = new BlockHelmet().setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setUnlocalizedName("blockHelmet").setRegistryName("helmet");
     
 		addBlocks(HELMET);
     }
@@ -28,6 +31,7 @@ public class AllBlocks {
     		logger.error(block + " could not be added due to missing registry name.");
     	}else{
     		blockSet.add(block);
+    		//itemBlockSet.add(Item.getItemFromBlock(block));
     	}
     }
     
