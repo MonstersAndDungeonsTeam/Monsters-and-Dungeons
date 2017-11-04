@@ -6,8 +6,8 @@ import ruukas.monstersanddungeons.tileentity.AllTileEntities;
 
 public class CommonProxy {
 	public void preInit() {
-		AllItems.initItems();
 		AllBlocks.initBlocks();
+		AllItems.initItems();
 		AllTileEntities.initTileEntities();
 	}
 

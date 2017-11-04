@@ -17,7 +17,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 import ruukas.monstersanddungeons.MonstersAndDungeons;
-import ruukas.monstersanddungeons.block.AllBlocks;
 
 public class AllItems {
     public static Item WASP_HEAD;
@@ -67,9 +66,6 @@ public class AllItems {
     	@SubscribeEvent
     	public static void registerItemModels(ModelRegistryEvent event){
     		for (Item item : itemSet){
-        		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
-    		}
-    		for (Item item : AllBlocks.itemBlockSet){
         		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName().toString(), "inventory"));
     		}
     	}

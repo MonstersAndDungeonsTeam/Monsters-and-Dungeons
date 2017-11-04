@@ -53,7 +53,6 @@ public class TileHelmet extends TileEntity
     @Override
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
     	readFromNBT(pkt.getNbtCompound());
-    	System.out.println(pkt.getNbtCompound().toString());
     }
     
     public boolean setItemStack(ItemStack itemstack){
@@ -91,14 +90,6 @@ public class TileHelmet extends TileEntity
     public void setHelmetRotation(int rotation)
     {
         this.helmetRotation = rotation;
-        System.out.println("Rotation: " + rotation);
-    }
-    
-    @Override
-    public boolean receiveClientEvent(int id, int type)
-    {
-    	System.out.println("Id: " + id);
-		return super.receiveClientEvent(id, type);
     }
 
     public void mirror(Mirror mirrorIn)
