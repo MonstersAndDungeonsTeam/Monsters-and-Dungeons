@@ -14,7 +14,7 @@ import ruukas.monstersanddungeons.MonstersAndDungeons;
 public class AllBlocks {
     public static Block HELMET;
     
-    public static HashSet<Block> blockSet;
+    public static HashSet<Block> blockSet = new HashSet<Block>();
         
     public static void initBlocks(){
 		HELMET = new BlockHelmet();

@@ -24,7 +24,7 @@ public class AllItems {
     public static Item WASP_LEGS;
     public static Item WASP_BOOTS;
     
-    public static HashSet<Item> itemSet;
+    public static HashSet<Item> itemSet = new HashSet<Item>();;
         
     public static void initItems(){
 		WASP_HEAD = new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.HEAD).setUnlocalizedName("chestplateWasp").setRegistryName("wasp_helmet");
