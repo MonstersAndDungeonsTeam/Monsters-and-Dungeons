@@ -19,6 +19,13 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init() {
 		super.init();
-	}
+		
+		/*Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
+		RenderPlayer steve = skinMap.get("default");
+		steve.addLayer(new LayerDungeonCape(steve));
+		
+		RenderPlayer slim = skinMap.get("slim");
+		slim.addLayer(new LayerDungeonCape(slim));*/
 
+	}
 }

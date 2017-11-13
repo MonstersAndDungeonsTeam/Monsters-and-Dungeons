@@ -2,9 +2,11 @@ package ruukas.monstersanddungeons.client.renderer.tileentity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -29,12 +31,13 @@ public class TileStatueRenderer extends TileEntitySpecialRenderer<TileStatue>
 
     public void renderHelmet(float x, float y, float z, EnumFacing facing, float rotationIn, ModelBase model, int destroyStage)
     {  	
+    	ModelBiped playerModel = (ModelBiped) model;
     	GlStateManager.pushMatrix();
-    	GlStateManager.translate(x, y, z);
-    	GlStateManager.scale(1.0F, 1.0F, -1.0F);
-    	//model.render(Minecraft.getMinecraft().player, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.2F);
-    	//GlStateManager.rotate(180, 0.0f, 1.0f, 0.0f);
-    	Minecraft.getMinecraft().getRenderManager().getEntityRenderObject(Minecraft.getMinecraft().player).doRender(Minecraft.getMinecraft().player, x, y, z, 0, 0.0F);
+    	GlStateManager.translate(x+0.5f, y+3.0f, z+0.5f);
+        //GlStateManager.enableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
+    	this.bindTexture(DefaultPlayerSkin.getDefaultSkinLegacy());
+        playerModel.render(Minecraft.getMinecraft().player, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        //GlStateManager.disableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
     	GlStateManager.popMatrix();
     }
 }

@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "facing=up": { "model": "monstersanddungeons:ender_light" },
+        "facing=east": { "model": "monstersanddungeons:ender_light_wall" },
+        "facing=south": { "model": "monstersanddungeons:ender_light_wall", "y": 90 },
+        "facing=west": { "model": "monstersanddungeons:ender_light_wall", "y": 180 },
+        "facing=north": { "model": "monstersanddungeons:ender_light_wall", "y": 270 }
+    }
+}

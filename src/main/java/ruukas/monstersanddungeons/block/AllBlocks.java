@@ -20,14 +20,18 @@ public class AllBlocks {
     
     public static Block HELMET;
     public static Block STATUE;
+    
+    public static Block ENDERLIGHT;
         
     public static void initBlocks(){
     	System.out.println(itemBlockSet);
 		HELMET = new BlockHelmet().setUnlocalizedName("blockHelmet").setRegistryName("helmet");
 		STATUE = new BlockStatue().setUnlocalizedName("blockStatue").setRegistryName("statue");
+		
+		ENDERLIGHT = new BlockEnderTorch().setUnlocalizedName("blockEnderLight").setRegistryName("ender_light");
     
 		addBlocks(HELMET);
-		addBlocksWithItemBlock(STATUE);
+		addBlocksWithItemBlock(STATUE, ENDERLIGHT);
     }
     
     public static boolean addBlock(Block block){
@@ -49,8 +53,8 @@ public class AllBlocks {
     
     public static void addBlocksWithItemBlock(Block... blocks){
     	for(Block block : blocks){
-    		if(addBlock(block)){
-    			itemBlockSet.add(block);
+    		if(addBlock(block)){//Adds the block without ItemBlock
+    			itemBlockSet.add(block);//Then adds the ItemBlock if successfully added without
     		}
     	}
     }
