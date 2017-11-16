@@ -2,6 +2,7 @@ package ruukas.monstersanddungeons;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -16,10 +17,12 @@ public class MonstersAndDungeons
     public static final String MODID = "monstersanddungeons";
     public static final String VERSION = "0.1";
     
+    public static CreativeTabs CREATIVE_TAB;
+    
     @Instance
     MonstersAndDungeons instance;
         
-    @SidedProxy(clientSide = "ruukas.monstersanddungeons.client.ClientProxy")
+    @SidedProxy(clientSide = "ruukas.monstersanddungeons.client.ClientProxy", serverSide = "ruukas.monstersanddungeons.server.ServerProxy")
     public static CommonProxy proxy;
     
     public static Logger logger;

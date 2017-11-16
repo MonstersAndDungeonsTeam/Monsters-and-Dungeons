@@ -27,12 +27,32 @@ public class AllItems {
     public static HashSet<Item> itemSet = new HashSet<Item>();    
         
     public static void initItems(){
-		WASP_HEAD = new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.HEAD).setUnlocalizedName("chestplateWasp").setRegistryName("wasp_helmet");
-		WASP_CHEST = new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.CHEST).setUnlocalizedName("chestplateWasp").setRegistryName("wasp_chest");
-		WASP_LEGS = new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.LEGS).setUnlocalizedName("leggingsWasp").setRegistryName("wasp_leggings");
-		WASP_BOOTS = new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.FEET).setUnlocalizedName("bootsWasp").setRegistryName("wasp_boots");
+		WASP_HEAD = constructItem(new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.HEAD), "waspHelmet");
+		WASP_CHEST = constructItem(new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.CHEST), "waspChestplate");
+		WASP_LEGS = constructItem(new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.LEGS), "waspLeggings");
+		WASP_BOOTS = constructItem(new ItemArmorWasp(ArmorMaterial.GOLD, 0, EntityEquipmentSlot.FEET), "waspBoots");
+    }
     
-		addItems(WASP_HEAD, WASP_CHEST, WASP_LEGS, WASP_BOOTS);
+    public static Item constructItem(Item item, String name){
+    	item.setUnlocalizedName(name);
+    	
+    	String registryName = MonstersAndDungeons.MODID + ":";
+    	
+    	for(int i=0;i<name.length();i++){
+    		char c = name.charAt(i);
+    		if(Character.isUpperCase(c)){
+    			registryName += "_" + Character.toLowerCase(c);
+    		}else{
+    			registryName += c;
+    		}
+    	}
+    	item.setRegistryName(registryName);
+    	
+    	item.setCreativeTab(MonstersAndDungeons.CREATIVE_TAB);
+    	
+    	addItem(item);
+    	
+    	return item;
     }
     
     public static void addItem(Item item){
@@ -41,12 +61,6 @@ public class AllItems {
     		logger.error(item + " could not be added due to missing registry name.");
     	}else{
     		itemSet.add(item);
-    	}
-    }
-    
-    public static void addItems(Item... items){
-    	for(Item item : items){
-    		addItem(item);
     	}
     }
     

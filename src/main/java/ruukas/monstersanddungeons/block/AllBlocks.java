@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -30,14 +29,35 @@ public class AllBlocks {
     public static Block ENDERLIGHT;
         
     public static void initBlocks(){
-    	System.out.println(itemBlockSet);
-		HELMET = new BlockHelmet().setUnlocalizedName("blockHelmet").setRegistryName("helmet");
-		STATUE = new BlockStatue().setUnlocalizedName("blockStatue").setRegistryName("statue");
-		
-		ENDERLIGHT = new BlockEnderTorch().setUnlocalizedName("blockEnderLight").setRegistryName("ender_light");
+		HELMET = constructBlock(new BlockHelmet(), "helmet", false);
+		STATUE = constructBlock(new BlockStatue(), "statue", true);
+		ENDERLIGHT = constructBlock(new BlockEnderTorch(), "enderLight", true);
+    }
     
-		addBlocks(HELMET);
-		addBlocksWithItemBlock(STATUE, ENDERLIGHT);
+    public static Block constructBlock(Block block, String name, boolean shouldAddItemBlock){
+    	block.setUnlocalizedName(name);
+    	
+    	String registryName = MonstersAndDungeons.MODID + ":";
+    	
+    	for(int i=0;i<name.length();i++){
+    		char c = name.charAt(i);
+    		if(Character.isUpperCase(c)){
+    			registryName += "_" + Character.toLowerCase(c);
+    		}else{
+    			registryName += c;
+    		}
+    	}
+    	
+    	block.setRegistryName(registryName);
+    	
+    	block.setCreativeTab(MonstersAndDungeons.CREATIVE_TAB);
+    	
+    	boolean addedWithoutErrors = addBlock(block);
+    	if(addedWithoutErrors && shouldAddItemBlock){
+    		itemBlockSet.add(block);
+    	}
+    	
+    	return block;
     }
     
     public static boolean addBlock(Block block){
@@ -48,20 +68,6 @@ public class AllBlocks {
     	}else{
     		blockSet.add(block);
     		return true;
-    	}
-    }
-    
-    public static void addBlocks(Block... blocks){
-    	for(Block block : blocks){
-    		addBlock(block);
-    	}
-    }
-    
-    public static void addBlocksWithItemBlock(Block... blocks){
-    	for(Block block : blocks){
-    		if(addBlock(block)){//Adds the block without ItemBlock
-    			itemBlockSet.add(block);//Then adds the ItemBlock if successfully added without
-    		}
     	}
     }
     
@@ -82,7 +88,7 @@ public class AllBlocks {
     		IForgeRegistry<Item> registry = event.getRegistry();
     		
     		for (Block block : itemBlockSet){
-    			Item item = new ItemBlock(block).setCreativeTab(CreativeTabs.BUILDING_BLOCKS).setRegistryName(block.getRegistryName().toString());
+    			Item item = new ItemBlock(block).setUnlocalizedName(block.getUnlocalizedName().substring(5)).setRegistryName(block.getRegistryName().toString()).setCreativeTab(MonstersAndDungeons.CREATIVE_TAB);
     			registry.register(item);
     			itemBlockItemsSet.add(item);
     		}

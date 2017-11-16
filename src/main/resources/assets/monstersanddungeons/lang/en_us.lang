@@ -1,5 +1,9 @@
-item.helmetWasp.name=Wasp Helmet
-item.chestplateWasp.name=Wasp Chestplate
-item.leggingsWasp.name=Wasp Leggings
-item.bootsWasp.name=Wasp Boots
-tile.blockEnderLight.name=Light-emitting Tentacles
+itemGroup.monstersanddungeons=Monsters and Dungeons
+
+item.waspHelmet.name=Wasp Helmet
+item.waspChestplate.name=Wasp Chestplate
+item.waspLeggings.name=Wasp Leggings
+item.waspBoots.name=Wasp Boots
+
+tile.enderLight.name=Light-emitting Tentacles
+tile.statue.name=Statue

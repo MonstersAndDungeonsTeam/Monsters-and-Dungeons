@@ -1,10 +1,40 @@
 {
     "variants": {
-        "normal": [
-            { "model": "stone" },
-            { "model": "stone_mirrored" },
-            { "model": "stone", "y": 180 },
-            { "model": "stone_mirrored", "y": 180 }
-        ]
+    	"facing=down,nodrop=false":{
+    		"model": "stone"
+    	},
+    	"facing=east,nodrop=false":{
+    		"model": "stone"
+    	},
+    	"facing=north,nodrop=false":{
+    		"model": "stone"
+    	},
+    	"facing=south,nodrop=false":{
+    		"model": "stone"
+    	},
+		"facing=up,nodrop=false":{
+    		"model": "stone"
+    	},
+    	"facing=west,nodrop=false":{
+    		"model": "stone"
+    	},
+		"facing=down,nodrop=true":{
+    		"model": "stone"
+    	},
+    	"facing=east,nodrop=true":{
+    		"model": "stone"
+    	},
+    	"facing=north,nodrop=true":{
+    		"model": "stone"
+    	},
+    	"facing=south,nodrop=true":{
+    		"model": "stone"
+    	},
+		"facing=up,nodrop=true":{
+    		"model": "stone"
+    	},
+    	"facing=west,nodrop=true":{
+    		"model": "stone"
+    	}
     }
 }
