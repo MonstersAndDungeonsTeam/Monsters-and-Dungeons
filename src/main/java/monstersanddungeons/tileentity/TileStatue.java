@@ -15,58 +15,58 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileStatue extends TileEntity
 {
-	private int rotation;
-	private ModelBiped model = new ModelBiped();
-
-	
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    private int rotation;
+    private ModelBiped model = new ModelBiped();
+    
+    public NBTTagCompound writeToNBT( NBTTagCompound compound )
     {
-        super.writeToNBT(compound);
-        compound.setByte("Rot", (byte)(this.rotation & 255));
-
-
+        super.writeToNBT( compound );
+        compound.setByte( "Rot", (byte) (this.rotation & 255) );
+        
         return compound;
     }
-
-    public void readFromNBT(NBTTagCompound compound)
+    
+    public void readFromNBT( NBTTagCompound compound )
     {
-        super.readFromNBT(compound);
-        this.rotation = compound.getByte("Rot");
+        super.readFromNBT( compound );
+        this.rotation = compound.getByte( "Rot" );
     }
     
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    	readFromNBT(pkt.getNbtCompound());
+    public void onDataPacket( NetworkManager net, SPacketUpdateTileEntity pkt )
+    {
+        readFromNBT( pkt.getNbtCompound() );
     }
     
-    @SideOnly(Side.CLIENT)
+    @SideOnly( Side.CLIENT )
     public int getHelmetRotation()
     {
         return this.rotation;
     }
-
-    public void setHelmetRotation(int rotation)
+    
+    public void setHelmetRotation( int rotation )
     {
         this.rotation = rotation;
     }
-
-    public void mirror(Mirror mirrorIn)
+    
+    public void mirror( Mirror mirrorIn )
     {
-        if (this.world != null && this.world.getBlockState(this.getPos()).getValue(BlockSkull.FACING) == EnumFacing.UP)
+        if ( this.world != null && this.world.getBlockState( this.getPos() ).getValue( BlockSkull.FACING ) == EnumFacing.UP )
         {
-            this.rotation = mirrorIn.mirrorRotation(this.rotation, 16);
+            this.rotation = mirrorIn.mirrorRotation( this.rotation, 16 );
         }
     }
-
-    public void rotate(Rotation rotationIn)
+    
+    public void rotate( Rotation rotationIn )
     {
-        if (this.world != null && this.world.getBlockState(this.getPos()).getValue(BlockSkull.FACING) == EnumFacing.UP)
+        if ( this.world != null && this.world.getBlockState( this.getPos() ).getValue( BlockSkull.FACING ) == EnumFacing.UP )
         {
-            this.rotation = rotationIn.rotate(this.rotation, 16);
+            this.rotation = rotationIn.rotate( this.rotation, 16 );
         }
     }
-
-	public ModelBase getModel() {
-		return this.model;
-	}
+    
+    public ModelBase getModel()
+    {
+        return this.model;
+    }
 }
