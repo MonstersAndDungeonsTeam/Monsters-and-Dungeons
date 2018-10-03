@@ -1,5 +1,6 @@
-package ruukas.monstersanddungeons.block;
+package monstersanddungeons.block;
 
+import monstersanddungeons.tileentity.TileStatue;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -9,7 +10,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import ruukas.monstersanddungeons.tileentity.TileStatue;
 
 public class BlockStatue extends BlockContainer {
 

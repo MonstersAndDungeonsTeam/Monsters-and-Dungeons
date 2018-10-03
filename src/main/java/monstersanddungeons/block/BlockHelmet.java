@@ -1,7 +1,9 @@
-package ruukas.monstersanddungeons.block;
+package monstersanddungeons.block;
 
 import java.util.Random;
 
+import monstersanddungeons.item.AllItems;
+import monstersanddungeons.tileentity.TileHelmet;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
@@ -27,8 +29,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ruukas.monstersanddungeons.item.AllItems;
-import ruukas.monstersanddungeons.tileentity.TileHelmet;
 
 @SuppressWarnings("deprecation")
 public class BlockHelmet extends BlockContainer

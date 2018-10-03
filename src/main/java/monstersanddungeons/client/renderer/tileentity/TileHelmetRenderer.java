@@ -1,5 +1,8 @@
-package ruukas.monstersanddungeons.client.renderer.tileentity;
+package monstersanddungeons.client.renderer.tileentity;
 
+import monstersanddungeons.MonstersAndDungeons;
+import monstersanddungeons.client.model.ModelWaspHead;
+import monstersanddungeons.tileentity.TileHelmet;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -10,9 +13,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ruukas.monstersanddungeons.MonstersAndDungeons;
-import ruukas.monstersanddungeons.client.model.ModelWaspHead;
-import ruukas.monstersanddungeons.tileentity.TileHelmet;
 
 @SideOnly(Side.CLIENT)
 public class TileHelmetRenderer extends TileEntitySpecialRenderer<TileHelmet>

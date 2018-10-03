@@ -1,9 +1,10 @@
-package ruukas.monstersanddungeons.item;
+package monstersanddungeons.item;
 
 import java.util.HashSet;
 
 import org.apache.logging.log4j.Logger;
 
+import monstersanddungeons.MonstersAndDungeons;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -16,7 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
-import ruukas.monstersanddungeons.MonstersAndDungeons;
 
 public class AllItems {
     public static Item WASP_HEAD;

@@ -1,5 +1,7 @@
-package ruukas.monstersanddungeons.client.renderer.entity.layers;
+package monstersanddungeons.client.renderer.entity.layers;
 
+import monstersanddungeons.MonstersAndDungeons;
+import monstersanddungeons.item.AllItems;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -12,8 +14,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ruukas.monstersanddungeons.MonstersAndDungeons;
-import ruukas.monstersanddungeons.item.AllItems;
 
 @SideOnly(Side.CLIENT)
 public class LayerDungeonCape implements LayerRenderer<AbstractClientPlayer>

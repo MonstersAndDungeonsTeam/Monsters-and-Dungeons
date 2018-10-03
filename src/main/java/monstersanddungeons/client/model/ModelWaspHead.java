@@ -1,4 +1,4 @@
-package ruukas.monstersanddungeons.client.model;
+package monstersanddungeons.client.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

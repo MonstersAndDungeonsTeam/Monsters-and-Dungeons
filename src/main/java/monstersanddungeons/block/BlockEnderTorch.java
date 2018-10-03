@@ -1,4 +1,4 @@
-package ruukas.monstersanddungeons.block;
+package monstersanddungeons.block;
 
 import java.util.Random;
 

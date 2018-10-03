@@ -1,7 +1,11 @@
-package ruukas.monstersanddungeons.item;
+package monstersanddungeons.item;
 
 import java.util.List;
 
+import monstersanddungeons.MonstersAndDungeons;
+import monstersanddungeons.block.AllBlocks;
+import monstersanddungeons.client.model.ModelWaspArmor;
+import monstersanddungeons.tileentity.TileHelmet;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSkull;
 import net.minecraft.block.state.IBlockState;
@@ -24,10 +28,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ruukas.monstersanddungeons.MonstersAndDungeons;
-import ruukas.monstersanddungeons.block.AllBlocks;
-import ruukas.monstersanddungeons.client.model.ModelWaspArmor;
-import ruukas.monstersanddungeons.tileentity.TileHelmet;
 
 public class ItemArmorWasp extends ItemArmor {
 	public ItemArmorWasp(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
