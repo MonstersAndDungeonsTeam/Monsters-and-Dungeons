@@ -22,7 +22,7 @@ public class TileHelmetRenderer extends TileEntitySpecialRenderer<TileHelmet>
     
     public void render( TileHelmet te, double x, double y, double z, float partialTicks, int destroyStage, float alpha )
     {
-        EnumFacing enumfacing = EnumFacing.getFront( te.getBlockMetadata() & 7 );
+        EnumFacing enumfacing = EnumFacing.byIndex( te.getBlockMetadata() & 7 );
         this.renderHelmet( (float) x, (float) y, (float) z, enumfacing, (float) (te.getHelmetRotation() * 360) / 16.0F, te.getItemStack(), destroyStage );
     }
     

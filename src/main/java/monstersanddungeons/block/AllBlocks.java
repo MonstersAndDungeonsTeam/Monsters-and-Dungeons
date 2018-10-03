@@ -38,7 +38,7 @@ public class AllBlocks
     
     public static Block constructBlock( Block block, String name, boolean shouldAddItemBlock )
     {
-        block.setUnlocalizedName( name );
+        block.setTranslationKey( name );
         
         String registryName = MonstersAndDungeons.MODID + ":";
         
@@ -105,7 +105,7 @@ public class AllBlocks
             
             for ( Block block : itemBlockSet )
             {
-                Item item = new ItemBlock( block ).setUnlocalizedName( block.getUnlocalizedName().substring( 5 ) ).setRegistryName( block.getRegistryName().toString() ).setCreativeTab( MonstersAndDungeons.CREATIVE_TAB );
+                Item item = new ItemBlock( block ).setRegistryName( block.getRegistryName() ).setCreativeTab( MonstersAndDungeons.CREATIVE_TAB );
                 registry.register( item );
                 itemBlockItemsSet.add( item );
             }

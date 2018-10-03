@@ -37,7 +37,7 @@ public class AllItems
     
     public static Item constructItem( Item item, String name )
     {
-        item.setUnlocalizedName( name );
+        item.setTranslationKey( name );
         
         String registryName = MonstersAndDungeons.MODID + ":";
         

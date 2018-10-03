@@ -171,7 +171,7 @@ public class BlockHelmet extends BlockContainer
      */
     public IBlockState getStateFromMeta( int meta )
     {
-        return this.getDefaultState().withProperty( FACING, EnumFacing.getFront( meta & 7 ) ).withProperty( NODROP, Boolean.valueOf( (meta & 8) > 0 ) );
+        return this.getDefaultState().withProperty( FACING, EnumFacing.byIndex( meta & 7 ) ).withProperty( NODROP, Boolean.valueOf( (meta & 8) > 0 ) );
     }
     
     /**

@@ -39,7 +39,7 @@ public class MonstersAndDungeons
         
         MonstersAndDungeons.CREATIVE_TAB = new CreativeTabs( MonstersAndDungeons.MODID ) {
             @Override
-            public ItemStack getTabIconItem()
+            public ItemStack createIcon()
             {
                 return new ItemStack( AllBlocks.ENDERLIGHT );
             }
