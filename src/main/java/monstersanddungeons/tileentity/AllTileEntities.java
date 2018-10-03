@@ -1,7 +1,7 @@
-package ruukas.monstersanddungeons.tileentity;
+package monstersanddungeons.tileentity;
 
+import monstersanddungeons.MonstersAndDungeons;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import ruukas.monstersanddungeons.MonstersAndDungeons;
 
 public class AllTileEntities {               
     public static void initTileEntities(){

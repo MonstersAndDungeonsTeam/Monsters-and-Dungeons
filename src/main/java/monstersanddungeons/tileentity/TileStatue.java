@@ -1,4 +1,4 @@
-package ruukas.monstersanddungeons.tileentity;
+package monstersanddungeons.tileentity;
 
 import net.minecraft.block.BlockSkull;
 import net.minecraft.client.model.ModelBase;

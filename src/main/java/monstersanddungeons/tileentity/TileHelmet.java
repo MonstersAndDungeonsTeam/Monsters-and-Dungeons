@@ -1,7 +1,9 @@
-package ruukas.monstersanddungeons.tileentity;
+package monstersanddungeons.tileentity;
 
 import javax.annotation.Nullable;
 
+import monstersanddungeons.item.AllItems;
+import monstersanddungeons.item.ItemArmorWasp;
 import net.minecraft.block.BlockSkull;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -16,8 +18,6 @@ import net.minecraft.util.Rotation;
 import net.minecraftforge.common.util.Constants.NBT;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import ruukas.monstersanddungeons.item.AllItems;
-import ruukas.monstersanddungeons.item.ItemArmorWasp;
 
 public class TileHelmet extends TileEntity
 {

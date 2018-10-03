@@ -1,8 +1,13 @@
-package ruukas.monstersanddungeons;
+package monstersanddungeons;
 
 import org.apache.logging.log4j.Logger;
 
+import monstersanddungeons.block.AllBlocks;
+import monstersanddungeons.item.AllItems;
+import monstersanddungeons.proxy.IProxy;
+import monstersanddungeons.tileentity.AllTileEntities;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -22,8 +27,8 @@ public class MonstersAndDungeons
     @Instance
     MonstersAndDungeons instance;
         
-    @SidedProxy(clientSide = "ruukas.monstersanddungeons.client.ClientProxy", serverSide = "ruukas.monstersanddungeons.server.ServerProxy")
-    public static CommonProxy proxy;
+    @SidedProxy(clientSide = "monstersanddungeons.proxy.ClientProxy", serverSide = "monstersanddungeons.proxy.ServerProxy")
+    public static IProxy proxy;
     
     public static Logger logger;
     
@@ -31,6 +36,17 @@ public class MonstersAndDungeons
     public void preInit(FMLPreInitializationEvent event)
     {
     	logger = event.getModLog();
+    	
+        MonstersAndDungeons.CREATIVE_TAB = new CreativeTabs(MonstersAndDungeons.MODID) {
+            @Override
+            public ItemStack getTabIconItem() {
+                return new ItemStack(AllBlocks.ENDERLIGHT);
+            }
+        };
+        
+        AllBlocks.initBlocks();
+        AllItems.initItems();
+        AllTileEntities.initTileEntities();
     	
     	proxy.preInit();
     }
