@@ -25,14 +25,12 @@ public class AllBlocks
     public static final HashSet<Item> itemBlockItemsSet = new HashSet<Item>();
     
     public static Block HELMET;
-    public static Block STATUE;
     
     public static Block ENDERLIGHT;
     
     public static void initBlocks()
     {
         HELMET = constructBlock( new BlockHelmet(), "helmet", false );
-        STATUE = constructBlock( new BlockStatue(), "statue", true );
         ENDERLIGHT = constructBlock( new BlockEnderTorch(), "enderLight", true );
     }
     
